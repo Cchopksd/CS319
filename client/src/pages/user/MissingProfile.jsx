@@ -20,7 +20,7 @@ const MissingProfile = () => {
             <div className="missing-profile-container">
                 {stockData.map((data, key) => {
                     return (
-                        <div key={key}>
+                        <div className="missing-profile-container-center" key={key}>
                             <main className="missing-profile-header" >
                                 <div className="missing-missing-group">
                                     <img className="image-missing-profile" src={data.img1} alt="" />
