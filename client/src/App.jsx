@@ -1,25 +1,29 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import * as React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './App.css'
 
-import Login from "./pages/user/Login";
-import Home from "./pages/user/Home";
-import Register from "./pages/user/Register";
-import FindMissing from "./pages/user/FindMissing";
-import ReportMissing from "./pages/user/ReportMissing";
+// import หน้าต่างๆ หรือ Component ต่างๆ
+import Navbar from './components/Navbar';
+import Home from './pages/user/Home'
+import Login from './pages/user/Login'
+import Register from './pages/user/Register'
+import ReportMissing from './pages/user/ReportMissing'
+import FindMissing from './pages/user/FindMissing'
 
-function App() {
-
+const App = () => {
   return (
-    <Router>
+    <>
+      {/* ต้องมี state เปลี่ยนให้ Navbar ไม่แสดงถ้าเข้าสู่ login และ register */}
+      <Navbar/>
       <Routes>
-        <Route path="/" element={<Home />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/register" element={<Register />}/>
-        <Route path="/find-missing" element={<FindMissing />}/>
-        <Route path="/report-missing" element={<ReportMissing />}/>
+        <Route index element={<Home/>}/>
+        <Route path='/login' element={<Login/>}/>
+        <Route path='/register' element={<Register/>}/>
+        <Route path='/find-missing' element={<FindMissing/>}/>
+        <Route path='/report-missing' element={<ReportMissing/>}/>
       </Routes>
-    </Router>
-  );
-};
+    </>
+  )
+}
 
-export default App;
+export default App
