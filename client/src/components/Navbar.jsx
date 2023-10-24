@@ -10,7 +10,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 
 const Navbar = () => {
     return (
-        <img src={require('../images/components/Navbar/logo.png')} alt="" />
+        <div>
+            
+        </div>
     )
 }
 
