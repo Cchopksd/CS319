@@ -1,0 +1,36 @@
+.navbar{
+    padding: 25px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #393646;
+    box-shadow:0px 5px 15px 0 rgba(0,0,0,0.16);
+}
+.nav-img-logo {
+    margin: 0 0 0 80px;
+    width: 80px;
+}
+.nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 70px;
+    margin: 0 80px 0 0;
+}
+.nav-disable-link-style {
+    color: #FFFFFF;
+    text-decoration: none;
+}
+.nav-regis-btn {
+    cursor: pointer;
+    color: #FFFFFF;
+    background-color: #0C5DFF;
+    height: 40px;
+    width: 110px;
+    border-radius: 10px;
+    border: none;
+}
+.nav-regis-btn:hover {
+    opacity: 0.7;
+    transition: 0.3s ease
+}
