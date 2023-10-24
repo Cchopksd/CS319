@@ -8,7 +8,7 @@ import Home from './pages/user/Home'
 import Login from './pages/user/Login'
 import Register from './pages/user/Register'
 import ReportMissing from './pages/user/ReportMissing'
-import FindMissing from './pages/user/FindMissing'
+import MissingProfile from './pages/user/MissingProfile'
 
 const App = () => {
   return (
@@ -18,7 +18,7 @@ const App = () => {
         <Route index element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
-        <Route path='/find-missing' element={<FindMissing/>}/>
+        <Route path='/missing-profile' element={<MissingProfile/>}/>
         <Route path='/report-missing' element={<ReportMissing/>}/>
       </Routes>
     </>
