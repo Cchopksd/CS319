@@ -11,18 +11,18 @@ const MissingInfo = () => {
                         <section>
                             <div className='missing-info-content-text-header'>
                                 <p className='missing-info-content-text-body'>ที่อยู่ล่าสุดที่พบเจอ</p>
-                                <li>{data.dateUpdate}</li>
+                                <li className='missing-info-content-text-date'>{data.dateUpdate}</li>
                             </div>
-                            <p>
+                            <p className='missing-info-content-text-p'>
                                 {data.data1}
                             </p>
                         </section>
                         <section>
                             <div className='missing-info-content-text-header'>
                                 <p className='missing-info-content-text-body'>ข้อมูลเพิ่มเติม</p>
-                                <li>{data.dateUpdate}</li>
+                                <li className='missing-info-content-text-date'>{data.dateUpdate}</li>
                             </div>
-                            <p>
+                            <p className='missing-info-content-text-p'>
                                 {data.data1}
                             </p>
                         </section>

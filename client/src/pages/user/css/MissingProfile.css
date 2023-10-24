@@ -8,7 +8,6 @@
     display: flex;
     width: 1200px;
     margin: 100px auto;
-
 }
 
 .missing-profile-container-center{
@@ -20,7 +19,7 @@
     gap: 2.5em;
 }
 
-.missing-missing-group{
+.image-missing-group{
     display: flex;
     gap: 1.5rem;
 }
@@ -28,6 +27,7 @@
 .image-missing-profile{
     height: 200px;
     width: 200px;
+    object-fit: cover;
 }
 
 .missing-profile-body{
@@ -80,9 +80,39 @@
     border-radius: 30px;
     font-size: 16px;
     cursor: pointer;
+    transition: 0.3s ease;
 }
 
 .missing-profile-button-switch.clicked{
     color: #fff;
     background-color: #393646;
+}
+
+
+@media screen and (min-width : 0px) and (max-width : 950px) {
+
+    .missing-profile-body{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 1.5em;
+    }
+
+    .missing-profile-page {
+        display: flex;
+        width: auto;
+        height: auto;
+    }
+
+    .image-missing-group{
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+
+    .missing-profile-header{
+        display: flex;
+        flex-direction: column;
+    }
+
 }
