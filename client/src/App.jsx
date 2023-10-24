@@ -13,8 +13,6 @@ import FindMissing from './pages/user/FindMissing'
 const App = () => {
   return (
     <>
-      {/* ต้องมี state เปลี่ยนให้ Navbar ไม่แสดงถ้าเข้าสู่ login และ register */}
-      <Navbar/>
       <Routes>
         <Route index element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
