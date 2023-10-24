@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Login from "./pages/user/Login";
 import Home from "./pages/user/Home";
@@ -10,15 +10,15 @@ import ReportMissing from "./pages/user/ReportMissing";
 function App() {
 
   return (
-    <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/find-missing" element={<FindMissing />} />
-          <Route path="/report-missing" element={<ReportMissing />} />
-        </Routes>
-    </BrowserRouter>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />}/>
+        <Route path="/login" element={<Login />}/>
+        <Route path="/register" element={<Register />}/>
+        <Route path="/find-missing" element={<FindMissing />}/>
+        <Route path="/report-missing" element={<ReportMissing />}/>
+      </Routes>
+    </Router>
   );
 };
 
