@@ -1,11 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const ReportMissing = () => {
     return (
         <div>
-        
+            
         </div>
-    )
+    );
 }
 
-export default ReportMissing
+export default ReportMissing;
