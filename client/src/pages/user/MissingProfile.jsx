@@ -36,8 +36,10 @@ const MissingProfile = () => {
                                             {data.date}
                                         </div>
                                     </div>
-                                    <div className="missing-profile-body-status">
-                                        {data.status}
+                                    <div className={`missing-profile-body-status
+                                        ${data.status ? 'found' : 'not-found'}
+                                    `}>
+                                        {data.status ? 'พบแล้ว' : 'ยังไม่พบ'}
                                     </div>
                                 </div>
                             </main>

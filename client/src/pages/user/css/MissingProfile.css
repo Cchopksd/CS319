@@ -51,10 +51,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90px;
+    width: 100px;
     height: 35px;
     border-radius: 30px;
     color: #fff;
+}
+
+.found {
+    background-color: #1AE246;
+}
+
+.not-found {
     background-color: #EB5F5F;
 }
 
