@@ -21,6 +21,10 @@
     color: #FFFFFF;
     text-decoration: none;
 }
+.nav-disable-link-style:hover {
+    transition: 0.3s ease;
+    opacity: 0.7;
+}
 .nav-regis-btn {
     cursor: pointer;
     color: #FFFFFF;
