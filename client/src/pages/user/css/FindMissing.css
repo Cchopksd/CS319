@@ -1,0 +1,188 @@
+.find-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto 0 auto;
+    width: 1200px;
+    /* height: 1500px; */
+}
+.find-back-box {
+    display: flex;
+    align-items: end;
+    margin: 0 0 0 100px;
+    height: 100px;
+}
+.find-title-box {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    width: 700px;
+    height: 200px;
+    margin: auto;
+}
+.find-title-box label{
+    font-size: 45px;
+    font-weight: bold;
+    margin: 0 0 70px 0;
+}
+.find-search-box {
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+}
+.find-search-icon:hover {
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 0.3s ease;
+}
+.find-search-box input{
+    font-size: 24px;
+    width: 640px;
+    height: 60px;
+    padding: 0px 30px;
+    background-color: #EEEEEE;
+    border: none;
+    outline: none;
+    border-radius: 20px 0 0 20px;
+}
+.find-search-box div{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    background-color: #EEEEEE;
+    border-radius: 0 20px 20px 0;
+}
+.find-result-box {
+    padding: 0 0 200px 0;
+    margin: 40px 0 0 0;
+    display: flex;
+    justify-content: space-around;
+    width: 1200px;
+    flex-wrap: wrap;
+}
+.find-card {
+    margin: 60px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    width: 330px;
+    height: 400px;
+    background-color: #FFFFFF;
+    box-shadow:0px 1px 1px 1px rgba(0,0,0,0.16);
+}
+.find-card:hover {
+    box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+.find-card img{
+    object-fit: cover;
+    height: 170px;
+}
+.find-info-box {
+    /* background-color:  saddlebrown; */
+    margin: 15px;
+    width: 290px;
+}
+.find-card-row-1 {
+    display: flex;
+    justify-content: space-between;
+    height: 30px;
+}
+.find-card-row-1 label {
+    font-size: 12px;
+    color: #0C5DFF;
+}
+.find-card-status {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    background-color: #E4746C;
+    height: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    color: #FFFFFF;
+}
+.find-card-row-2 {
+    display: flex;
+    height: 40px;
+}
+.find-card-row-2 label{
+    font-size: 16px;
+}
+.find-card-row-3 {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+}
+.find-card-place label{
+    font-size: 14px;
+}
+.find-card-cause label{
+    font-size: 14px;
+}
+.find-card-date label{
+    font-size: 14px;
+}
+.find-card-row-4 {
+    display: flex;
+    justify-content: space-between;
+}
+.find-card-province {
+    font-size: 12px;
+    color: black;
+    padding: 5px 10px;
+    background-color: #D0D0D0;
+    border-radius: 20px;
+}
+.find-card-clue {
+    display: flex;
+    align-items: center;
+}
+.find-card-clue-icon {
+    margin: 0 10px 0 0;
+}
+
+@media screen and (min-width: 950px) and (max-width : 1250px) {
+    .find-container {
+        margin: 0 auto 0 auto;
+        width: 800px;
+    }
+    .find-result-box {
+        width: 800px;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width : 950px) {
+    .find-back-box {
+        display: flex;
+        align-items: end;
+        margin: 0 0 0 50px;
+        height: 100px;
+    }
+    .find-container {
+        margin: 0 auto 0 auto;
+        width: 375px;
+    }
+    .find-title-box {
+        margin: 50px 0 0 0;
+        width: 375px;
+        height: 200px;
+    }
+    .find-title-box label{
+        font-size: 35px;
+        font-weight: bold;
+        margin: 0 0 70px 0;
+    }
+    .find-search-box input{
+        font-size: 18px;
+        width: 305px;
+        height: 60px;
+    }
+    .find-result-box {
+        margin: 10px 0 0 0;
+        padding: 0 0 150px 0;
+        width: 375px;
+    }
+}
