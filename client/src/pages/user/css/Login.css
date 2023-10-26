@@ -1,0 +1,212 @@
+.Login {
+    text-align: center;
+    display: flex;
+    padding: 90px 0 90px 0;
+    align-items: center;
+    justify-content: center;
+}
+.bg-signin {
+    background-color:#d0d0d0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+
+
+}
+
+
+.singin-container{
+    flex-direction: column;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-logo{
+    width: 100px;
+    padding-top: 20px;
+    justify-content: center;
+    display: flex;
+   
+}
+.img-back{
+    margin-right: 700px;
+    width: 20px;
+    display: flex;
+}
+.login-from{
+    display: flex;
+    flex-direction:column;
+    margin: auto;
+}
+.auth-form-page {
+    margin: 100px auto auto auto;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 700px;
+    width: 800px;
+    background-color: #ffff;
+    box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+    padding-top: 10px;
+   
+}
+
+
+
+.submit-container{
+    margin-left: 30px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 360px;
+    height: 60px;
+    color: white;
+    background: #393646;
+    border-radius: 10px;
+    cursor: pointer;
+}
+   
+
+.user-btn{
+    margin: 20px;
+}
+.link-btn {
+    
+    margin-top: 30px; 
+    background: none;
+   
+    
+}
+.customx-input-container {
+    position: relative;
+}
+
+.customx-input {
+    margin: 30px;
+    padding-left: 15px;
+    width: 350px;
+    height: 40px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    display: flex;
+    gap: 5em;
+}
+
+.customx-label {
+    position: absolute;
+    top: 0;
+    left: 45px;
+    transform: translateY(45%);
+    transition: all 0.3s ease-in-out;
+    pointer-events: none;
+}
+
+.customx-input:focus+.customx-label,
+.customx-input:not(:placeholder-shown)+.customx-label {
+    transform: translateY(-50%);
+    font-size: 12px;
+    padding: 0px 5px 0px 5px;
+    text-align: center;
+    background-color: #fff;
+}
+
+@media screen and (min-width: 0px) and (max-width : 1000px) {
+    .auth-form-page {
+        margin: auto auto auto auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 700px;
+        width: 500px;
+        background-color: #ffff;
+        box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+        padding-top: 10px;
+       
+    }
+    .img-back{
+        margin-right: 400px;
+        width: 20px;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 550px) and (max-width : 1000px) {
+    .auth-form-page {
+        margin: auto auto auto auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 700px;
+        width: 500px;
+        background-color: #ffff;
+        box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+        padding-top: 10px;
+       
+    }
+    .img-back{
+        margin-right: 400px;
+        width: 20px;
+        display: flex;
+    }
+}
+
+@media screen and (min-width: 0px) and (max-width : 550px) {
+    .auth-form-page {
+        margin: auto auto auto auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        height: 560px;
+        width: 300px;
+        background-color: #ffff;
+        box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+        padding-top: 10px;
+       
+    }
+    .img-back{
+        margin-right: 200px;
+        width: 20px;
+        display: flex;
+    }
+    .customx-input-container {
+        position: relative;
+    }
+    .customx-input {
+        margin: 30px;
+        padding-right: 20px;
+        padding-left: 20px;
+        width: 200px;
+        height: 30px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        display: flex;
+        gap: 5em;
+    }
+    .customx-label {
+        font-size: small;
+    }
+
+    .submit-container{
+        margin-left: 50px;    
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 200px;
+        height: 40px;
+        color: white;
+        background: #393646;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+    .link-btn {
+        font-size: small;  
+    }
+    
+    
+}

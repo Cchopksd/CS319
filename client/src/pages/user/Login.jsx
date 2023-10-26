@@ -1,16 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import "./css/Login.css"
+import logo from "../../assets/images/Navbar/logo-black.png"
+import logo2 from "../../assets/images/Navbar/logo-left.png"
+import { Link } from "react-router-dom";
 
-const Login = () => {
+
+export const Login = () => {
+    const [email, setEmail] = useState('');
+    const [pass, setPass] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log(email);
+    }
     return (
-        <div>
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid
-                consectetur voluptatum voluptatem a velit quod explicabo repellendus nemo
-                aspernatur natus voluptas modi ab eius, repudiandae asperiores ad!
-                Expedita, perspiciatis commodi?
-            </p>
+    <div className="bg-signin">
+        <div className="auth-form-page">
+            <div className="singin-container">  
+             <img className="img-back" src={logo2}/>
+             <img className="img-logo" src={logo}/>
+                <h2>เข้าสู่ระบบ</h2>   
+            <form className="login-form" onSubmit={handleSubmit}>
+
+            <div className="customx-input-container">
+                <input
+                    type="text"
+                    className="customx-input"
+                    placeholder=" "
+                    />
+                <label className="customx-label">อีเมล *</label>
+            </div>  
+
+
+               <div className="customx-input-container">
+                <input
+                    type="text"
+                    className="customx-input"
+                    placeholder=" "
+                    />
+                <label className="customx-label">รหัสผ่าน *</label>
+            </div>  
+               
+                    <button className="submit-container">เข้าสู่ระบบ</button>
+
+                <div className="link-btn"><span>ยังไม่มีบัญชีผู้ใช้งาน<Link to='/Register'>สมัครสมาชิก</Link></span>
+                </div>               
+            </form>           
+            </div>          
+        </div>
         </div>
     );
-};
+}
 
 export default Login;

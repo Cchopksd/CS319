@@ -14,6 +14,10 @@ import FindMissing from './pages/user/FindMissing';
 const App = () => {
   return (
     <>
+<<<<<<< HEAD
+=======
+      {/* <Navbar/> */}
+>>>>>>> yuranan
       <Routes>
         <Route index element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
