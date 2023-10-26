@@ -13,7 +13,7 @@ import MissingProfile from './pages/user/MissingProfile'
 const App = () => {
   return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
       <Routes>
         <Route index element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
