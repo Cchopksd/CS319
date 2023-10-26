@@ -6,6 +6,8 @@ import { CgMenuGridO } from 'react-icons/cg'
 import { FiXCircle } from 'react-icons/fi'
 
 const Navbar = () => {
+    // redirect หน้า
+    const navigate = useNavigate()
 
     // dummy login user
     const dummyUser = {
@@ -31,8 +33,8 @@ const Navbar = () => {
                 <div>
                     {isLogin ? (
                         <ul className='nav-menu'>
-                            <Link className='nav-disable-link-style'>รายงานผู้สูญหาย</Link>
-                            <Link className='nav-disable-link-style'>ตามหาผู้สูญหาย</Link>
+                            <Link className='nav-disable-link-style' to='/report-missing'>รายงานผู้สูญหาย</Link>
+                            <Link className='nav-disable-link-style' to='/find-missing'>ตามหาผู้สูญหาย</Link>
                             <div className='nav-display-name-box'>
                                 <img src={dummyUser.image} alt="" />
                                 <label>{dummyUser.name}</label>
@@ -43,12 +45,12 @@ const Navbar = () => {
                         </ul>
                     ) : (
                         <ul className='nav-menu'>
-                            <Link className='nav-disable-link-style'>รายงานผู้สูญหาย</Link>
-                            <Link className='nav-disable-link-style'>ตามหาผู้สูญหาย</Link>
-                            <Link className='nav-disable-link-style'>
+                            <Link className='nav-disable-link-style' to='/report-missing'>รายงานผู้สูญหาย</Link>
+                            <Link className='nav-disable-link-style' to='/find-missing'>ตามหาผู้สูญหาย</Link>
+                            <Link className='nav-disable-link-style' to='/login'>
                                 เข้าสู่ระบบ
                             </Link>
-                            <Link>
+                            <Link to='/register'>
                                 <button className='nav-regis-btn'>สมัครสมาชิก</button>
                             </Link>
                         </ul>
@@ -69,10 +71,10 @@ const Navbar = () => {
                                 <label>{dummyUser.name}</label>
                             </div>
                         </div>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => {navigate(`/report-missing`)}}>
                             รายงานผู้สูญหาย
                         </div>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => {navigate(`/find-missing`)}}>
                             ตามหาผู้สูญหาย
                         </div>
                         <div className='nav-mobile-dropdown-block'>
@@ -81,16 +83,24 @@ const Navbar = () => {
                     </div>
                 ) : click && !isLogin ? (
                     <div className='nav-mobile-dropdown'>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => {
+                            navigate(`/report-missing`)
+                            setClick(!click)}}>
                             รายงานผู้สูญหาย
                         </div>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => {
+                            navigate(`/find-missing`)
+                            setClick(!click)}}>
                             รายงานผู้สูญหาย
                         </div>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => {
+                            navigate(`/login`)
+                            setClick(!click)}}>
                             เข้าสู่ระบบ
                         </div>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => {
+                            navigate(`/register`)
+                            setClick(!click)}}>
                             <label style={{color : '#0C5DFF'}}>สมัครสมาชิก</label>
                         </div>
                     </div>

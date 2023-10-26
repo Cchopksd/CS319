@@ -14,7 +14,6 @@ import FindMissing from './pages/user/FindMissing';
 const App = () => {
   return (
     <>
-      <Navbar/>
       <Routes>
         <Route index element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
