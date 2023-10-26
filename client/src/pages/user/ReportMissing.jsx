@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './css/ReportMissing.css'
 import axios from 'axios';
 import { stockData } from '../../demo/data';
+import Footer from '../../components/Footer';
 
 
 const ReportMissing = () => {
@@ -184,7 +185,9 @@ const ReportMissing = () => {
                     })}
                 </aside>
             </main>
+            {/* <Footer/> */}
         </div>
+         
     );
 };
 

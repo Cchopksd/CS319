@@ -1,0 +1,22 @@
+.footer-text {
+    gap: 3rem;
+    margin-left: 50px;
+    display: flex;
+    padding: 25px;
+    color: white;
+    
+    
+}
+
+.ft-color{
+    width: 100%;
+    background-color: #393646;
+}
+
+@media screen and (min-width: 0px) and (max-width : 450px) {
+    .footer-text {
+        font-size: small;
+        margin-left: 35px;
+    }
+    
+}

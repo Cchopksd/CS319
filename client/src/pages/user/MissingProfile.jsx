@@ -4,6 +4,7 @@ import Navbar from "../../components/Navbar";
 import MissingClue from "../../components/user/MissingClue";
 import MissingInfo from "../../components/user/MissingInfo";
 import '../user/css/MissingProfile.css'
+import Footer from "../../components/Footer";
 
 
 const MissingProfile = () => {
@@ -66,6 +67,7 @@ const MissingProfile = () => {
                     )
                 })}
             </div>
+            <Footer/>
         </div>
     );
 };

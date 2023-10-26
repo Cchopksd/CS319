@@ -22,7 +22,7 @@ const Register = () => {
         <div className="auth-form-register">
             <div className="singup-container">
 
-                <div className="find-back-box" >
+                <div className="findss-back-box" >
                     <IoIosArrowBack size={40} />
                 </div>
                 <h2>สร้างบัญชีผู้ใช้งาน</h2>
