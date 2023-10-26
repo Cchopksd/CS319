@@ -19,3 +19,20 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+@media screen and (min-width : 0px) and (max-width : 950px) {
+    .missing-info-content-text-header{
+        flex-direction: column;
+        align-items: self-start;
+        gap: 0px;
+    }
+    .container-missing-info{
+        width: 350px;
+    }
+    .missing-info-content-text-date{
+        font-size: 12px;
+    }
+    .missing-info-content-text-p{
+        font-size: 12px;
+    }
+}

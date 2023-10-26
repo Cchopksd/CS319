@@ -22,7 +22,7 @@ const MissingProfile = () => {
                     return (
                         <div className="missing-profile-container-center" key={key}>
                             <main className="missing-profile-header" >
-                                <div className="missing-missing-group">
+                                <div className="image-missing-group">
                                     <img className="image-missing-profile" src={data.img1} alt="" />
                                     <img className="image-missing-profile" src={data.img2} alt="" />
                                     <img className="image-missing-profile" src={data.img3} alt="" />
@@ -36,8 +36,10 @@ const MissingProfile = () => {
                                             {data.date}
                                         </div>
                                     </div>
-                                    <div className="missing-profile-body-status">
-                                        {data.status}
+                                    <div className={`missing-profile-body-status
+                                        ${data.status ? 'found' : 'not-found'}
+                                    `}>
+                                        {data.status ? 'พบแล้ว' : 'ยังไม่พบ'}
                                     </div>
                                 </div>
                             </main>
@@ -60,9 +62,6 @@ const MissingProfile = () => {
                                 </button>
                             </div>
                             {activeButton === 'button-info' ? <MissingInfo /> : <MissingClue />}
-                            <article>
-
-                            </article>
                         </div>
                     )
                 })}
