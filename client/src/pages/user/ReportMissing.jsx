@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './css/ReportMissing.css'
 import axios from 'axios';
 import { stockData } from '../../demo/data';
+import Swal from 'sweetalert2'
+import Navbar from '../../components/Navbar';
 
 
 const ReportMissing = () => {
@@ -17,6 +19,37 @@ const ReportMissing = () => {
         cause: '',
         etc: ''
     });
+
+    //กำหนด maximum ของ json ที่ส่งเข้ามา
+    const maxItemsToDisplay = 2;
+    const limitedData = stockData.slice(0, maxItemsToDisplay);
+
+    const sendReport = async (e) => {
+        e.preventDefault();
+
+        if (!name || !surname || !address || !gender || !provinceItem || !date || !month || !year || !cause || !etc) {
+            Swal.fire({
+                title: 'กรอกข้อมูลให้ครบถ้วน',
+                timer: 3500,
+            })
+        }
+        Swal.fire({
+            title: 'แบบฟอร์มถูกส่งเรียบร้อยแล้ว',
+            width: 600,
+            padding: '3em',
+            color: '#716add',
+        })
+        setInfo({
+            name: '',
+            surname: '',
+            address: '',
+            gender: '',
+            provinceItem: '',
+            date: '',
+            cause: '',
+            etc: ''
+        });
+    };
 
     const inputValue = (name) => (event) => {
         setInfo({ ...info, [name]: event.target.value });
@@ -45,8 +78,9 @@ const ReportMissing = () => {
 
     return (
         <div className='missing-report-page'>
+            <Navbar/>
             <main className='missing-report-container'>
-                <form className='missing-report-container-center'>
+                <form className='missing-report-container-center' onSubmit={sendReport}>
                     <h1>รายงานข้อมูลผู้สูญหาย</h1>
                     <section className='inputData'>
                         <h3>ข้อมูลของผู้สูญหาย</h3>
@@ -77,7 +111,7 @@ const ReportMissing = () => {
                                 type="text"
                                 value={info.address}
                                 onChange={inputValue('address')}
-                                className="custom-input"
+                                className="custom-input address-input"
                                 placeholder=" "
                             />
                             <label className="custom-label">ที่อยู่ล่าสุดของผู้สูญหาย *</label>
@@ -85,9 +119,9 @@ const ReportMissing = () => {
                         <div className='inputData-line-1'>
                             <div className="custom-input-container">
                                 <select
-                                    className="dropdown-toggle"
+                                    className="dropdown-toggle gender-input"
                                     onChange={inputValue('gender')}
-                                    defaultValue={info.gender}
+                                    value={info.gender}
                                 >
                                     <option value='' disabled>
                                         เพศ
@@ -103,8 +137,8 @@ const ReportMissing = () => {
                             <div className="custom-input-container">
                                 <select
                                     className="dropdown-toggle"
-                                    onChange={loadData}
-                                    defaultValue={info.province}
+                                    onChange={inputValue('provinceItem')}
+                                    value={info.provinceItem}
                                 >
                                     <option value='' disabled>
                                         เลือกจังหวัด
@@ -126,8 +160,8 @@ const ReportMissing = () => {
                                 <input
                                     type="date"
                                     onChange={inputValue('date')}
-                                    defaultValue={info.date}
-                                    className='dropdown-toggle'
+                                    value={info.date}
+                                    className='dropdown-toggle date'
                                 />
                                 <label className="custom-dropdown-label">วัน *</label>
                             </div>
@@ -159,7 +193,7 @@ const ReportMissing = () => {
                 </form>
                 <aside className='lasted-side'>
                     <h3>ผู้สูญหายล่าสุด</h3>
-                    {stockData.map((data, key) => {
+                    {limitedData.map((data, key) => {
                         return (
                             <div className='lasted-container' key={key}>
                                 <img className='lasted-image' src={data.img1} alt="" />
@@ -174,16 +208,19 @@ const ReportMissing = () => {
                                         </div>
                                     </div>
                                     <label>{data.name}</label>
-                                    <label className='lasted-info-etc'>สูญหายที่: {data.address}</label>
-                                    <label className='lasted-info-etc'>สาเหตุการสูญหาย: {data.cause}</label>
-                                    <label className='lasted-info-etc'>มีการรายงานการสูญหายวันที่: {data.dateUpdate}</label>
-                                    <label className='lasted-info-etc info-province'>{data.province}</label>
+                                    <div className='lasted-info-missing'>
+                                        <label className='lasted-info-etc'>สูญหายที่: {data.address}</label>
+                                        <label className='lasted-info-etc'>สาเหตุการสูญหาย: {data.cause}</label>
+                                        <label className='lasted-info-etc'>มีการรายงานการสูญหายวันที่: {data.dateUpdate}</label>
+                                        <label className='lasted-info-etc info-province'>{data.province}</label>
+                                    </div>
                                 </div>
                             </div>
                         )
                     })}
                 </aside>
             </main>
+
         </div>
     );
 };
