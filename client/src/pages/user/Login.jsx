@@ -3,9 +3,11 @@ import "./css/Login.css"
 import logo from "../../assets/images/Navbar/logo-black.png"
 import logo2 from "../../assets/images/Navbar/logo-left.png"
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export const Login = () => {
+    const navigate = useNavigate()
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
@@ -17,7 +19,7 @@ export const Login = () => {
     <div className="bg-signin">
         <div className="auth-form-page">
             <div className="singin-container">  
-             <img className="img-back" src={logo2}/>
+             <img className="img-back" src={logo2} onClick={()=>{navigate(-1)}}/>
              <img className="img-logo" src={logo}/>
                 <h2>เข้าสู่ระบบ</h2>   
             <form className="login-form" onSubmit={handleSubmit}>
