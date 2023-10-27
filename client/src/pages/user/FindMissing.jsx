@@ -7,6 +7,7 @@ import { MdOutlineModeComment } from 'react-icons/md'
 import { IoIosArrowBack } from 'react-icons/io'
 import { useNavigate } from 'react-router-dom'
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const FindMissing = () => {
 
@@ -102,6 +103,7 @@ const FindMissing = () => {
 
     return (
         <>
+        <div>
             <Navbar/>
             <div className="find-back-box" onClick={handleBack}>
                 <IoIosArrowBack size={60}/>
@@ -159,6 +161,8 @@ const FindMissing = () => {
                         </div>
                         ))}
                     </div>
+                </div>
+                    <Footer/>
             </div>
         </>
     );

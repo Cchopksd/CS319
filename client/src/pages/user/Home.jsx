@@ -4,6 +4,7 @@ import { HiOutlinePhone } from 'react-icons/hi'
 import { MdOutlineModeComment } from 'react-icons/md'
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
+import Footer from "../../components/Footer";
 
 const Home = () => {
     // redirect
@@ -184,6 +185,7 @@ const Home = () => {
                         ))}
                 </div>
             </div>
+        <Footer/>
         </>
     );
 };

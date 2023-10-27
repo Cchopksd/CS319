@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import "./css/Register.css"
 import { IoIosArrowBack } from 'react-icons/io'
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    const navigate = useNavigate()
     const [images, setImages] = useState('');
     const [imageURLs, setImageURLs] = useState('');
     const [fname, setFname] = useState('');
@@ -22,8 +24,8 @@ const Register = () => {
         <div className="auth-form-register">
             <div className="singup-container">
 
-                <div className="find-back-box" >
-                    <IoIosArrowBack size={40} />
+                <div className="findss-back-box" role="button" onClick={()=>{navigate(-1)}}>
+                    <IoIosArrowBack size={40}  />
                 </div>
                 <h2>สร้างบัญชีผู้ใช้งาน</h2>
                 <a>รูปโปรไฟล์</a>
