@@ -10,10 +10,6 @@ const userSchema = mongoose.Schema({
         type: String,
         // required: true
     },
-    username : {
-        type: String,
-        // required: true
-    },
     password : {
         type: String,
         // required: true
@@ -25,15 +21,15 @@ const userSchema = mongoose.Schema({
     phone : {
         type: String,
     },
-    mem_profileImage : {
+    profileImage : {
         type: String,
         default: "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
     },
-    mem_role : {
+    role : {
         type: String,
-        default: "member"
+        default: "user"
     },
-    mem_slug: {
+    slug: {
         type: String,
         lowercase: true,
         unique: true
@@ -42,7 +38,7 @@ const userSchema = mongoose.Schema({
 
 // เช็ค hash กับ ฐานข้อมูล
 memberSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.mem_password)
+    return await bcrypt.compare(enteredPassword, this.password)
 }
 
 // แปลง password เป็น hash
@@ -53,7 +49,7 @@ memberSchema.pre('save', async function (next) {
 
     // hash รหัสผ่าน
     const salt = await bcrypt.genSalt(10);
-    this.mem_password = await bcrypt.hash(this.mem_password, salt)
+    this.password = await bcrypt.hash(this.password, salt)
 })
 
-module.exports = mongoose.model("Members",memberSchema)
+module.exports = mongoose.model("Users",userSchema)
