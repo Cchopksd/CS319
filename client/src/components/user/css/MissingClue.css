@@ -1,23 +1,25 @@
-/* .missClue-container {
-    width: 1050px;
-} */
+.missClue-container {
+    width: 1030px;
+}
 .missClue-writeComment-box {
     display: flex;
     margin: 50px 0 0 0;
 }
 .missClue-login-photo {
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
     border-radius: 50px;
-    margin: 0 20px 0 0;
+    margin: 0 40px 0 0;
 }
 .missClue-input-box {
     display: flex;
     flex-direction: column;
     width: 90%;
     padding: 20px 30px;
-    background-color: #D0D0D0;
+    background-color: #FFFFFF;
     border-radius: 20px;
+    box-shadow:0px 3px 12px 1px rgba(0,0,0,0.16);
 }
 .missClue-input {
     font-size: 18px;
@@ -25,7 +27,7 @@
     border: none;
     outline: none;
     height: 80px;
-    background-color: #D0D0D0;
+    background-color: #FFFFFF;
 }
 .missClue-input-footer-box {
     display: flex;
@@ -33,7 +35,7 @@
     padding: 10px 0;
 }
 .missClue-comment-box {
-    padding: 30px 0;
+    padding: 30px 0 0 0;
 }
 .missClue-comment-header {
     display: flex;
@@ -57,8 +59,67 @@
     margin: 0 0 0 10px;
 }
 .missClue-comment-des-box {
-    margin: 20px 0 20px 100px;
+    margin: 10px 0 10px 100px;
 }
 .missClue-comment-des-box p{
     margin: 0px 0px;
+}
+.missClue-comment-photo-box {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 50px 0 0 0;
+}
+.missClue-comment-photo-box img{
+    width: 250px;
+    height: 180px;
+    object-fit: cover;
+    margin: 0 20px 20px 0;
+}
+
+@media screen and (min-width : 0px) and (max-width : 1100px) {
+    .missClue-container {
+        width: 700px;
+    }
+}
+
+@media screen and (min-width : 0px) and (max-width : 765px) {
+    .missClue-container {
+        width: 375px;
+    }
+    .missClue-login-photo {
+        width: 40px;
+        height: 40px;
+        margin: 0 20px 0 0;
+    }
+    .missClue-input {
+        font-size: 14px;
+        height: 60px;
+    }
+    .missClue-comment-profile-photo {
+        width: 40px;
+        height: 40px;
+        margin: 0 20px 0 0;
+    }
+    .missClue-comment-name {
+        font-size: 14px;
+        font-weight: bold;
+        margin: 0 5px 0 0;
+    }
+    .missClue-comment-date {
+        font-size: 12px;
+        margin: 0 0 0 0px;
+    }
+    .missClue-comment-des-box {
+        margin: 10px 0 10px 60px;
+    }
+    .missClue-comment-des-box p{
+        font-size: 14px;
+        margin: 0px 0px;
+    }
+    .missClue-comment-photo-box img{
+        width: 250px;
+        height: 180px;
+        object-fit: cover;
+        margin: 0 20px 20px 0;
+    }
 }
