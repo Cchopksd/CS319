@@ -3,4 +3,113 @@
     background-repeat: no-repeat;
     background-position-x: center;
     background-attachment: fixed;
+    display: flex;
+}
+
+.frame-page {
+    display: flex;
+    justify-content: center;
+    height: 700px;
+    width: 800px;
+    background-color: #393646;
+    box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+    padding-top: 10px;
+}
+
+.txt-page{
+    text-align: center;
+    margin: 10px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+}
+.tt-page{
+    
+    font-size: 30px;
+    font-weight: 100;
+    color: white;
+   
+}
+
+.qr-page{
+    margin: 40px;
+    width: 320px;
+    height: 320px;
+}
+
+.tt-top{
+    width: 1000px;
+    margin: 100px 0px 100px 0px;
+    text-align: center;
+    font-size: 30px;
+    color: #543eb9;
+    
+}
+
+.tt-p{
+    width: 1000px;
+    margin: 100px 0px 100px 0px;
+    text-align: center;
+    font-size: 30px;
+    color: white;
+}
+
+.pp-txt{
+    margin: 10px;
+}
+
+.bt-page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 0px) and (max-width : 1000px) {
+    .frame-page {
+        margin: auto auto auto auto;
+        height: 700px;
+        width: 700px;
+        background-color: #393646;
+        box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
+        padding-top: 10px;
+    
+    }
+    .tt-top{
+        width: 1000px;
+        margin: 100px 0px 100px 00px;
+        text-align: center;
+        font-size: 25px;
+        color: #543eb9;
+        
+    }
+    .tt-p{
+        width: 1000px;
+        margin: 50px 0px 100px 00px;
+        text-align: center;
+        font-size: 25px;
+        color: white;
+    }
+    .qr-page{
+        width: 300px;
+        height: 300px;
+    }
+    .pp-txt{
+        margin: 10px;
+        font-size: 30px;
+
+    }
+    .txt-page{  
+        font-size: 40px;
+    }
+}
+
+@media screen and (min-width: 980px) and (max-width : 1000px) {
+    
+  
+
+}
+
+@media screen and (min-width: 0px) and (max-width : 905px) {
+
 }

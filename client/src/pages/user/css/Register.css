@@ -61,6 +61,7 @@
 }
 
 .findss-back-box {
+    width: 30px;
     display: flex;
     align-items: end;
     margin-right: 400px;
