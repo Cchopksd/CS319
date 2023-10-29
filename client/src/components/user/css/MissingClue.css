@@ -1,0 +1,64 @@
+/* .missClue-container {
+    width: 1050px;
+} */
+.missClue-writeComment-box {
+    display: flex;
+    margin: 50px 0 0 0;
+}
+.missClue-login-photo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50px;
+    margin: 0 20px 0 0;
+}
+.missClue-input-box {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    padding: 20px 30px;
+    background-color: #D0D0D0;
+    border-radius: 20px;
+}
+.missClue-input {
+    font-size: 18px;
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 80px;
+    background-color: #D0D0D0;
+}
+.missClue-input-footer-box {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.missClue-comment-box {
+    padding: 30px 0;
+}
+.missClue-comment-header {
+    display: flex;
+    align-items: center;
+    padding: 20px 0;
+}
+.missClue-comment-profile-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    object-fit: cover;
+    margin: 0 40px 0 0;
+}
+.missClue-comment-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 10px 0 0;
+}
+.missClue-comment-date {
+    font-size: 18px;
+    margin: 0 0 0 10px;
+}
+.missClue-comment-des-box {
+    margin: 20px 0 20px 100px;
+}
+.missClue-comment-des-box p{
+    margin: 0px 0px;
+}
