@@ -101,6 +101,10 @@ const FindMissing = () => {
         navigate(-1)
     }
 
+    const handleGoProfile = () => {
+        navigate(`/missing-profile`)
+    }
+
     return (
         <>
         <div>
@@ -120,7 +124,7 @@ const FindMissing = () => {
                 </div>
                 <div className="find-result-box">
                         {dummyData.map((item) => (
-                            <div className="find-card" key={item.fname}>
+                            <div className="find-card" key={item.fname} onClick={handleGoProfile}>
                                 <img src={item.photo} alt=""/>
                                 <div className="find-info-box">
                                     <div className="find-card-row-1">

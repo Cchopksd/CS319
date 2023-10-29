@@ -109,6 +109,10 @@ const Home = () => {
         navigate(`/find-missing`)
     }
 
+    const handleGoProfile = () => {
+        navigate(`/missing-profile`)
+    }
+
     return (
         <>  
             <Navbar/>
@@ -143,7 +147,7 @@ const Home = () => {
                 <label className="home-missing-title">ผู้สูญหายกรณีล่าสุด</label>
                 <div className="home-missing-latest-box">
                 {dummyData.map((item) => (
-                            <div className="home-card" key={item.fname}>
+                            <div className="home-card" key={item.fname} onClick={handleGoProfile}>
                                 <img src={item.photo} alt=""/>
                                 <div className="home-info-box">
                                     <div className="home-card-row-1">
