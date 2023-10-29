@@ -7,7 +7,7 @@ const MissingClue = () => {
             <hr />
             {stockData.map((data, key) => {
                 <div>
-                    
+                    kub
                 </div>
             })}
         </div>
