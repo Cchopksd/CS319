@@ -1,33 +1,32 @@
-.missing-report-page{
+.missing-report-page {
     display: flex;
     flex-direction: column;
     width: auto;
     height: auto;
 }
 
-.missing-report-container{
+.missing-report-container {
     display: flex;
     gap: 8rem;
     width: 1200px;
     margin: 100px auto;
 }
 
-.missing-report-container-center{
-    margin: auto;
+.missing-report-container-center {
 }
 
-.inputData{
+.inputData {
     display: flex;
     flex-direction: column;
     gap: 2rem;
 }
 
-.inputData-line-1{
+.inputData-line-1 {
     display: flex;
     gap: 2rem;
 }
 
-.submit-form-report{
+.submit-form-report {
     display: flex;
     justify-content: center;
     margin: 40px auto;
@@ -42,22 +41,22 @@
     transition: all 0.5s ease-in-out;
 }
 
-.submit-form-report:hover{
+.submit-form-report:hover {
     opacity: 0.5;
 }
 
-.lasted-info-head{
+.lasted-info-head {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
 }
 
-.lasted-info-missing{
+.lasted-info-missing {
     display: flex;
     flex-direction: column;
 }
 
-.lasted-status{
+.lasted-status {
     font-size: 12px;
     display: flex;
     align-items: center;
@@ -68,7 +67,7 @@
     color: #fff;
 }
 
-.lasted-side{
+.lasted-side {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -76,37 +75,37 @@
     width: 300px;
 }
 
-.lasted-container{
+.lasted-container {
     display: flex;
     flex-direction: column;
     width: 260px;
-    margin: 20px;
+    margin: 20px auto;
     background-color: #FFF;
 }
 
-.lasted-info-inside{
+.lasted-info-inside {
     display: flex;
     flex-direction: column;
     margin: auto 10px;
     gap: 0.5rem;
 }
 
-.lasted-image{
+.lasted-image {
     height: 150px;
     width: 260px;
     object-fit: cover;
 }
 
-.lasted-info-date{
+.lasted-info-date {
     font-size: 12px;
     color: #0C5DFF;
 }
 
-.lasted-info-etc{
+.lasted-info-etc {
     font-size: 12px;
 }
 
-.info-province{
+.info-province {
     display: flex;
     background-color: #ccc;
     width: 60px;
@@ -123,7 +122,6 @@
 
 /* input */
 .custom-input {
-    padding-left: 15px;
     width: 300px;
     height: 40px;
     border: 2px solid #ccc;
@@ -131,7 +129,9 @@
     outline: none;
     display: flex;
     gap: 5em;
+    padding-left: 15px;
 }
+
 
 .address-input {
     width: 653px;
@@ -157,7 +157,7 @@
 
 
 /* dropdown */
-.dropdown-toggle{
+.dropdown-toggle {
     padding-left: 15px;
     width: 320px;
     height: 45px;
@@ -168,12 +168,12 @@
     gap: 5em;
 }
 
-.gender-input{
+.gender-input {
     width: 120px;
     height: 45px;
 }
 
-.date{
+.date {
     padding-left: 15px;
     width: 300px;
     height: 42px;
@@ -212,7 +212,7 @@
 }
 
 /* textarea */
-.custom-textarea-label{
+.custom-textarea-label {
     position: absolute;
     top: 0;
     left: 12px;
@@ -232,11 +232,145 @@
     resize: none !important;
 }
 
-.custom-textarea:focus+ .custom-textarea-label,
-.custom-textarea:not(:placeholder-shown) + .custom-textarea-label {
+.custom-textarea:focus+.custom-textarea-label,
+.custom-textarea:not(:placeholder-shown)+.custom-textarea-label {
     transform: translateY(-50%);
     font-size: 12px;
     padding: 0px 5px 0px 5px;
     text-align: center;
     background-color: #fff;
+}
+
+/* @media screen and (min-width: 950px) and (max-width : 1250px) {
+    .missing-report-container{
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        margin: 100px auto;
+        align-items: center;
+    }
+    .custom-input {
+        padding-left: 15px;
+        width: 100px;
+        height: 40px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        display: flex;
+        gap: 5em;
+    }
+} */
+
+@media screen and (min-width: 0px) and (max-width : 950px) {
+    .missing-report-container {
+        display: flex;
+        flex-direction: column;
+        width: 300px;
+        margin: auto;
+    }
+
+    .custom-input {
+        padding-left: 15px;
+        width: 300px;
+        height: 40px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        display: flex;
+        gap: 5em;
+    }
+
+    .inputData-line-1 {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .submit-form-report {
+        display: flex;
+        justify-content: center;
+        margin: 40px auto;
+        padding: 5px;
+        width: 320px;
+        border-radius: 8px;
+        color: #fff;
+        background: var(--primary-primary, #0C5DFF);
+        outline: none;
+        border: none;
+        cursor: pointer;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .lasted-info-head {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+    }
+
+    .lasted-info-missing {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .lasted-status {
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 25px;
+        border-radius: 30px;
+        color: #fff;
+    }
+
+    .lasted-side {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #D9D9D9;
+        width: 300px;
+    }
+
+    .lasted-container {
+        display: flex;
+        flex-direction: column;
+        width: 260px;
+        margin: 20px;
+        background-color: #FFF;
+    }
+
+    .lasted-info-inside {
+        display: flex;
+        flex-direction: column;
+        margin: auto 10px;
+        gap: 0.5rem;
+    }
+
+    .lasted-image {
+        height: 150px;
+        width: 260px;
+        object-fit: cover;
+    }
+
+    .lasted-info-date {
+        font-size: 12px;
+        color: #0C5DFF;
+    }
+
+    .lasted-info-etc {
+        font-size: 12px;
+    }
+
+
+    .custom-textarea {
+        padding: 15px;
+        width: 290px;
+        height: 100px;
+        border: 2px solid #ccc;
+        border-radius: 5px;
+        outline: none;
+        display: flex;
+        resize: none !important;
+    }
+
 }

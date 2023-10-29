@@ -1,0 +1,144 @@
+.admin-screen {
+    display: flex;
+    flex-direction: column;
+}
+
+.admin-dashboard {
+    width: 1220px;
+    margin: 100px auto;
+    border-radius: 16px;
+    box-shadow: 0px 6px 12px 0px rgba(4, 9, 33, 0.08);
+    padding: 20px;
+    align-items: center;
+}
+
+.admin-text-header {
+    margin: 20px;
+}
+
+.admin-layout-search-data {
+    display: flex;
+    justify-content: center;
+    margin: 40px auto;
+}
+
+.admin-search-data {
+    display: flex;
+    width: 1300px;
+    height: 85px;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    box-shadow: 0px 6px 12px 0px rgba(4, 9, 33, 0.08);
+    border: 1px solid var(---, rgba(4, 9, 33, 0.10));
+}
+
+.admin-frame-table {
+    height: 660px;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+    margin: 80px auto;
+}
+
+.table-header {
+    font-weight: bold;
+}
+
+.table-row-head {
+    text-align: center;
+
+}
+
+.table-row-body {
+    text-align: center;
+}
+
+
+/* .table-row-body:nth-child(even) {
+    background-color: #fafafa;
+    border-bottom: 1px solid #fafafa;
+} */
+
+.table-header,
+.table-field {
+    padding: 15px;
+    overflow-wrap: break-word;
+    border-bottom: 1px solid var(--divider, rgba(0, 0, 0, 0.12));
+}
+
+.admin-verify-button {
+    border-radius: 6px;
+    color: var(--white-white-100, #FFF);
+    background: var(--primary-primary, #0C5DFF);
+    border: none;
+    width: 75px;
+    height: 30px;
+    padding: 5px 15px;
+    text-decoration: none;
+    transition: 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
+.admin-bt-delete {
+    display: flex;
+
+    color: red;
+    background: none;
+    border: none;
+    font-size: 24px;
+    align-items: center;
+    transition: 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        opacity: 0.5;
+    }
+}
+
+.pagination-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.admin-search-button {
+    display: flex;
+    width: 200px;
+    height: 45px;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    background-color: #0C5DFF;
+    color: #FFF;
+    border-radius: 8px;
+    border: none !important;
+    transition: 0.3s ease;
+    &:hover{
+        opacity: 0.7;
+    }
+}
+
+.admin-person-dead {
+    color: slategray;
+}
+
+.admin-person-verifying {
+    color: #0C5DFF;
+}
+
+.admin-person-found {
+    color: #428F5E;
+}
+
+.admin-person-not-found {
+    color: #E4746C;
+}

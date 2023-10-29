@@ -79,7 +79,7 @@ const ReportMissing = () => {
 
     return (
         <div className='missing-report-page'>
-            <Navbar/>
+            <Navbar />
             <main className='missing-report-container'>
                 <form className='missing-report-container-center' onSubmit={sendReport}>
                     <h1>รายงานข้อมูลผู้สูญหาย</h1>
@@ -221,9 +221,9 @@ const ReportMissing = () => {
                     })}
                 </aside>
             </main>
-            {/* <Footer/> */}
+            <Footer />
         </div>
-         
+
     );
 };
 
