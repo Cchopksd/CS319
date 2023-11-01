@@ -9,17 +9,14 @@
     margin: 0 0 0 100px;
     height: 100px;
 }
-
 .missing-profile-container{
     display: flex;
     width: 1200px;
     margin: 100px auto;
 }
-
 .missing-profile-container-center{
     margin: auto;
 }
-
 .missing-profile-header{
     display: flex;
     gap: 2.5em;
