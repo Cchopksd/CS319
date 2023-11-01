@@ -41,19 +41,19 @@ const userSchema = mongoose.Schema({
 }, {timestamps: true})
 
 // เช็ค hash กับ ฐานข้อมูล
-memberSchema.methods.matchPassword = async function (enteredPassword) {
-    return await bcrypt.compare(enteredPassword, this.mem_password)
+userSchema.methods.matchPassword = async function (enteredPassword) {
+    return await bcrypt.compare(enteredPassword, this.password)
 }
 
 // แปลง password เป็น hash
-memberSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
     if(!this.isModified){
         next()
     }
 
     // hash รหัสผ่าน
     const salt = await bcrypt.genSalt(10);
-    this.mem_password = await bcrypt.hash(this.mem_password, salt)
+    this.password = await bcrypt.hash(this.password, salt)
 })
 
-module.exports = mongoose.model("Members",memberSchema)
+module.exports = mongoose.model("Members",userSchema)
