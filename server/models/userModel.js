@@ -37,12 +37,12 @@ const userSchema = mongoose.Schema({
 }, {timestamps: true})
 
 // เช็ค hash กับ ฐานข้อมูล
-memberSchema.methods.matchPassword = async function (enteredPassword) {
+userSchema.methods.matchPassword = async function (enteredPassword) {
     return await bcrypt.compare(enteredPassword, this.password)
 }
 
 // แปลง password เป็น hash
-memberSchema.pre('save', async function (next) {
+userSchema.pre('save', async function (next) {
     if(!this.isModified){
         next()
     }
