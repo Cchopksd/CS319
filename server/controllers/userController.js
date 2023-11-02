@@ -73,7 +73,9 @@ exports.signup = async(req,res) => {
 exports.signin = async(req,res) =>{
     const {email, pass} = req.body
 
-    if(!email || !pass){
+    console.log(email, pass)
+
+    if(email == "" || pass == ""){
         return res.status(400).json({error:"กรุณากรอกข้อมูลให้ครบ"})
     }
 
@@ -93,4 +95,16 @@ exports.signin = async(req,res) =>{
     }else {
         return res.status(400).json({error: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง"})
     }
+}
+
+// เอาข้อมูลเข้า navbar
+exports.getUserLogin = async (req,res) => {
+    const { user } = req.body
+    console.log(user)
+    await Member.findOne({email : user}).then((userInfo) => {
+        console.log(userInfo)
+        res.status(200).json(userInfo)
+    }).catch((err) => {
+        res.status(400).json({error: err})
+    })
 }

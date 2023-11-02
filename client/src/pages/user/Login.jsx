@@ -29,6 +29,8 @@ export const Login = () => {
             // else{
             //     authenticate(res,()=>navigate('/home'))
             // }
+        }).catch((err) => {
+            Swal.fire('แจ้งเตือน', err.response.data.error, 'error')
         })
 
     }
@@ -40,7 +42,6 @@ export const Login = () => {
                     <img className="img-logo" src={logo} />
                     <h2>เข้าสู่ระบบ</h2>
                     <form className="login-form" onSubmit={handleSubmit}>
-
                         <div className="customx-input-container">
                             <input
                                 type="text"
@@ -51,8 +52,6 @@ export const Login = () => {
                             />
                             <label className="customx-label">อีเมล *</label>
                         </div>
-
-
                         <div className="customx-input-container">
                             <input
                                 type="text"
@@ -63,9 +62,7 @@ export const Login = () => {
                             />
                             <label className="customx-label">รหัสผ่าน *</label>
                         </div>
-
                         <button className="submit-container" type="submit">เข้าสู่ระบบ</button>
-
                         <div className="link-btn"><span>ยังไม่มีบัญชีผู้ใช้งาน<Link to='/Register'>สมัครสมาชิก</Link></span>
                         </div>
                     </form>

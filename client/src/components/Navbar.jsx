@@ -6,6 +6,7 @@ import { CgMenuGridO } from 'react-icons/cg'
 import { FiXCircle } from 'react-icons/fi'
 import Context from '../contexts/Provider';
 import { logout } from '../services/authorize';
+import axios from 'axios'
 
 const Navbar = () => {
     // redirect หน้า
@@ -13,6 +14,10 @@ const Navbar = () => {
 
     // state ของ Context API
     const {user, setUser} = useContext(Context)
+
+    // state ของ navbar
+    const [name, setName] = useState("");
+    const [userImage, setUserImage]=  useState("")
 
     // dummy login user
     const dummyUser = {
@@ -25,15 +30,21 @@ const Navbar = () => {
     // เช็คว่า login
     const [isLogin, setIsLogin] = useState(false)
 
-    const loadData = () => {
+    // const loadData = () => {
 
-    }
+    // }
 
-    const getUserInfo = () => {
-
+    const getUserInfo = async () => {
+        await axios.post(`${import.meta.env.VITE_APP_API}/get-user-login`,{user}).then((res) => {
+            setName(res.data.fname)
+            setUserImage(res.data.profileImage)
+        }).catch((error) => {
+            console.log(error)
+        })
     }
 
     useEffect(() => {
+        getUserInfo()
         if (user) {
             setIsLogin(true)
         }
@@ -55,8 +66,8 @@ const Navbar = () => {
                             <Link className='nav-disable-link-style' to='/report-missing'>รายงานผู้สูญหาย</Link>
                             <Link className='nav-disable-link-style' to='/find-missing'>ตามหาผู้สูญหาย</Link>
                             <div className='nav-display-name-box'>
-                                <img src={dummyUser.image} alt="" />
-                                <label>{dummyUser.name}</label>
+                                <img src={userImage} alt="" />
+                                <label>{name}</label>
                             </div>
                             <Link>
                                 <button className='nav-logout-btn' onClick={() => logout(() => {
@@ -90,8 +101,8 @@ const Navbar = () => {
                     <div className='nav-mobile-dropdown'>
                         <div className='nav-mobile-dropdown-block'>
                             <div className='nav-display-name-box'>
-                                <img src={dummyUser.image} alt="" />
-                                <label>{dummyUser.name}</label>
+                                <img src={userImage} alt="" />
+                                <label>{name}</label>
                             </div>
                         </div>
                         <div className='nav-mobile-dropdown-block' role='button' onClick={() => {navigate(`/report-missing`)}}>
