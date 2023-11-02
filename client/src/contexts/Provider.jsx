@@ -17,7 +17,7 @@ export const Provider = ({children}) => {
     },[navigate])
 
     return (
-        <Context.Provider value={{username : user}}>
+        <Context.Provider value={{user}}>
             {children}
         </Context.Provider>
     )
