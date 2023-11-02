@@ -45,7 +45,7 @@ exports.signup = async(req,res) => {
             slug: slug})
             .then((user) => {
                 console.log(user)
-                res.json({token: generateToken(user._id)})})
+                res.json({token: generateToken(user._id), email:user.email})})
         .catch((err) => {
             res.status(400).json({error: err})
         })
@@ -61,7 +61,7 @@ exports.signup = async(req,res) => {
             profileImage: image,
             slug: slug})
             .then((user) => {
-                res.json({token: generateToken(user._id)})
+                res.json({token: generateToken(user._id), email:user.email})
         }).catch((err) => {
             res.status(400).json({error: err})
         })

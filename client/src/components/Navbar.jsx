@@ -4,10 +4,15 @@ import './css/Navbar.css'
 import Logo from '../assets/images/Navbar/logo.png' 
 import { CgMenuGridO } from 'react-icons/cg'
 import { FiXCircle } from 'react-icons/fi'
+import Context from '../contexts/Provider';
+import { logout } from '../services/authorize';
 
 const Navbar = () => {
     // redirect หน้า
     const navigate = useNavigate()
+
+    // state ของ Context API
+    const {user, setUser} = useContext(Context)
 
     // dummy login user
     const dummyUser = {
@@ -19,6 +24,20 @@ const Navbar = () => {
     const [click, setClick] = useState(false)
     // เช็คว่า login
     const [isLogin, setIsLogin] = useState(false)
+
+    const loadData = () => {
+
+    }
+
+    const getUserInfo = () => {
+
+    }
+
+    useEffect(() => {
+        if (user) {
+            setIsLogin(true)
+        }
+    }, [user])
 
     const handleClick = () => {
         setClick(!click)
@@ -40,7 +59,11 @@ const Navbar = () => {
                                 <label>{dummyUser.name}</label>
                             </div>
                             <Link>
-                                <button className='nav-logout-btn'>ออกจากระบบ</button>
+                                <button className='nav-logout-btn' onClick={() => logout(() => {
+                                    navigate('/')
+                                    // reload หน้าเว็บ
+                                    window.location.reload(true)
+                                })}>ออกจากระบบ</button>
                             </Link>
                         </ul>
                     ) : (
@@ -77,7 +100,11 @@ const Navbar = () => {
                         <div className='nav-mobile-dropdown-block' role='button' onClick={() => {navigate(`/find-missing`)}}>
                             ตามหาผู้สูญหาย
                         </div>
-                        <div className='nav-mobile-dropdown-block'>
+                        <div className='nav-mobile-dropdown-block' role='button' onClick={() => logout(() => {
+                                navigate('/')
+                                // reload หน้าเว็บ
+                                window.location.reload(true)
+                            })}>
                             <label style={{color : 'red'}}>ออกจากระบบ</label>
                         </div>
                     </div>

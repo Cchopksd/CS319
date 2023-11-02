@@ -4,6 +4,7 @@ import axios from "axios"
 // เก็บข้อมูลหรือเก็บ token / username => session storage
 export const authenticate = (response,next) => {
     if(window !== "undefined"){
+        console.log(response)
         //เก็บข้อมูลลง session storage
         localStorage.setItem("token",JSON.stringify(response.data.token))
         localStorage.setItem("user",JSON.stringify(response.data.email))
