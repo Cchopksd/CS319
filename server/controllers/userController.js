@@ -67,3 +67,30 @@ exports.signup = async(req,res) => {
         })
     }
 }
+
+
+//sign in
+exports.signin = async(req,res) =>{
+    const {email, pass} = req.body
+
+    if(!email || !pass){
+        return res.status(400).json({error:"กรุณากรอกข้อมูลให้ครบ"})
+    }
+
+    const user = await Member.findOne({email: email});
+
+    if(user){
+        if(user && (await user.matchPassword(pass))){
+            return(res.json)({
+                _id: user._id,
+                email: user.email,
+                role: user.role,
+                token: generateToken(user._id)
+            })
+        }else{
+            return res.status(400).json({error:"ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง"})
+        }
+    }else {
+        return res.status(400).json({error: "ชื่อผู้ใช้งานหรือรหัสผ่านไม่ถูกต้อง"})
+    }
+}

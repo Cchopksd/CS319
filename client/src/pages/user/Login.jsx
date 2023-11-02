@@ -4,6 +4,8 @@ import logo from "../../assets/images/Navbar/logo-black.png"
 import logo2 from "../../assets/images/Navbar/logo-left.png"
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 
 export const Login = () => {
@@ -11,9 +13,21 @@ export const Login = () => {
     const [email, setEmail] = useState('');
     const [pass, setPass] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(email);
+
+        await axios.post(`${process.env.REACT_APP_API}/signin`, {email,pass})
+        .then(async(res) => {
+            await Swal.fire('แจ้งเตือน','เข้าสู่ระบบสำเร็จ','success')
+            if(res.data.role === "admin"){
+
+            }
+            else{
+                authenticate(res,()=>navigate('/home'))
+            }
+        })
+
     }
     return (
         <div className="bg-signin">
@@ -29,6 +43,8 @@ export const Login = () => {
                                 type="text"
                                 className="customx-input"
                                 placeholder=" "
+                                value={email}
+                                onChange={(e)=>{setEmail(e.target.value)}}
                             />
                             <label className="customx-label">อีเมล *</label>
                         </div>
@@ -39,6 +55,8 @@ export const Login = () => {
                                 type="text"
                                 className="customx-input"
                                 placeholder=" "
+                                value={pass}
+                                onChange={(e)=>{setPass(e.target.value)}}
                             />
                             <label className="customx-label">รหัสผ่าน *</label>
                         </div>
