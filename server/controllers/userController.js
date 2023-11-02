@@ -42,13 +42,13 @@ exports.signup = async(req,res) => {
             password: password,
             email: email,
             phone: phone,
-            mem_slug: slug})
+            slug: slug})
             .then((user) => {
                 console.log(user)
                 res.json({token: generateToken(user._id)})})
-        // }).catch((err) => {
-        //     res.status(400).json({error: err})
-        // })
+        .catch((err) => {
+            res.status(400).json({error: err})
+        })
     }
 
     else{
@@ -58,8 +58,8 @@ exports.signup = async(req,res) => {
             password: password,
             email: email,
             phone: phone,
-            mem_profileImage: image,
-            mem_slug: slug})
+            profileImage: image,
+            slug: slug})
             .then((user) => {
                 res.json({token: generateToken(user._id)})
         }).catch((err) => {
