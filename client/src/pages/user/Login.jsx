@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
+import { authenticate } from "../../services/authorize";
 
 
 export const Login = () => {
@@ -17,15 +18,17 @@ export const Login = () => {
         e.preventDefault();
         console.log(email);
 
-        await axios.post(`${process.env.REACT_APP_API}/signin`, {email,pass})
-        .then(async(res) => {
-            await Swal.fire('แจ้งเตือน','เข้าสู่ระบบสำเร็จ','success')
-            if(res.data.role === "admin"){
 
-            }
-            else{
-                authenticate(res,()=>navigate('/home'))
-            }
+        await axios.post(`${import.meta.env.VITE_APP_API}/signin`,{email,pass})
+        .then(async (res) => {
+            await Swal.fire('แจ้งเตือน','เข้าสู่ระบบสำเร็จ','success')
+            authenticate(res,()=>navigate('/'))
+            // if(res.data.role === "admin"){
+
+            // }
+            // else{
+            //     authenticate(res,()=>navigate('/home'))
+            // }
         })
 
     }
@@ -61,7 +64,7 @@ export const Login = () => {
                             <label className="customx-label">รหัสผ่าน *</label>
                         </div>
 
-                        <button className="submit-container">เข้าสู่ระบบ</button>
+                        <button className="submit-container" type="submit">เข้าสู่ระบบ</button>
 
                         <div className="link-btn"><span>ยังไม่มีบัญชีผู้ใช้งาน<Link to='/Register'>สมัครสมาชิก</Link></span>
                         </div>
