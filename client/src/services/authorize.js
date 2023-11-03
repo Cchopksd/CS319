@@ -49,9 +49,9 @@ export const logout = (next) => {
 export const getUserId = async () => {
     if(window !== "undefined"){
         if(localStorage.getItem("user")){
-            const username = JSON.parse(localStorage.getItem("user"))
+            const user = JSON.parse(localStorage.getItem("user"))
             try {
-                const id = await axios.post(`${process.env.REACT_APP_API}/get-userId`,{username})
+                const id = await axios.post(`${import.meta.env.VITE_APP_API}/get-userId`,{user})
                 return id
             }catch (error) {
                 throw error;

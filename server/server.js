@@ -5,6 +5,7 @@ const connectDB = require("./configs/connectDB") // ไฟล์เชื่อ�
 
 //import route
 const userRoute = require("./routes/userRoute")
+const missingRequestRoute = require("./routes/missingRequestRoute")
 
 require('dotenv').config()
 
@@ -21,6 +22,7 @@ connectDB()
 
 // route
 app.use("/api",userRoute)
+app.use("/api",missingRequestRoute)
 
 const PORT = process.env.PORT || 5000
 

@@ -5,9 +5,13 @@ import { stockData } from '../../demo/data';
 import Swal from 'sweetalert2'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
-
+import { getUserId } from '../../services/authorize';
 
 const ReportMissing = () => {
+
+    // state ของ ผู้ที่จะทำการสร้างประกาศ
+    const [loginUser, setLoginUser] = useState("")
+
     const [info, setInfo] = useState({
         name: '',
         surname: '',
@@ -15,11 +19,26 @@ const ReportMissing = () => {
         gender: '',
         provinceItem: '',
         date: '',
-        month: '',
-        year: '',
         cause: '',
         etc: ''
     });
+
+    const { name, surname, address, gender, provinceItem, date, cause, etc } = info
+
+
+    // รูปที่จะส่งไปยัง server
+    const [image1, setImage1] = useState("")
+    const [image2, setImage2] = useState("")
+    const [image3, setImage3] = useState("")
+
+    // เช็คว่าแนบรูปไหม
+    const [uploadImg, setUploadImg] = useState(false)
+
+    //  state เก็บชุดรูปที่มาจาก child
+    const [images, setImages] = useState([])
+
+    // state เช็คว่า fetch api
+    const [loading, setLoading] = useState(false)
 
     //กำหนด maximum ของ json ที่ส่งเข้ามา
     const maxItemsToDisplay = 2;
@@ -28,13 +47,15 @@ const ReportMissing = () => {
     const sendReport = async (e) => {
         e.preventDefault();
 
-        if (!name || !surname || !address || !gender || !provinceItem || !date || !month || !year || !cause || !etc) {
-            Swal.fire({
-                title: 'กรอกข้อมูลให้ครบถ้วน',
-                timer: 3500,
-            })
+        if (name == "" || surname == "" || address == "" || gender == "" || provinceItem == "" || date == "" || cause == "" || etc == "") {
+            await Swal.fire(
+                'แจ้งเตือน',
+                'กรุณากรอกข้อมูลให้ครบถ้วน',
+                'error'
+            )
+            return
         }
-        Swal.fire({
+        await Swal.fire({
             title: 'แบบฟอร์มถูกส่งเรียบร้อยแล้ว',
             width: 600,
             padding: '3em',
@@ -59,6 +80,13 @@ const ReportMissing = () => {
     const [provinceList, setProvinceList] = useState([])
 
     const loadData = async (event) => {
+        // ดึงข้อมูล id ของผู้ใช้งาน
+        try{
+            const id = await getUserId()
+            setLoginUser(id.data)
+        }catch (error) {
+            console.error(error);
+        }
         // setProvinceList(event.target.value)
         await axios.get(`https://ckartisan.com/api/provinces`)
             .then((res) => {
@@ -89,7 +117,7 @@ const ReportMissing = () => {
                             <div className="custom-input-container">
                                 <input
                                     type="text"
-                                    value={info.name}
+                                    value={name}
                                     onChange={inputValue('name')}
                                     className="custom-input"
                                     placeholder=" "
@@ -99,7 +127,7 @@ const ReportMissing = () => {
                             <div className="custom-input-container">
                                 <input
                                     type="text"
-                                    value={info.surname}
+                                    value={surname}
                                     onChange={inputValue('surname')}
                                     className="custom-input"
                                     placeholder=" "
@@ -110,7 +138,7 @@ const ReportMissing = () => {
                         <div className="custom-input-container">
                             <input
                                 type="text"
-                                value={info.address}
+                                value={address}
                                 onChange={inputValue('address')}
                                 className="custom-input address-input"
                                 placeholder=" "
@@ -122,13 +150,13 @@ const ReportMissing = () => {
                                 <select
                                     className="dropdown-toggle gender-input"
                                     onChange={inputValue('gender')}
-                                    value={info.gender}
+                                    value={gender}
                                 >
                                     <option value='' disabled>
                                         เพศ
                                     </option>
                                     {options.map((option) => (
-                                        <option key={option.value} value={option.value}>
+                                        <option key={option.label} value={option.label}>
                                             {option.label}
                                         </option>
                                     ))}
@@ -139,7 +167,7 @@ const ReportMissing = () => {
                                 <select
                                     className="dropdown-toggle"
                                     onChange={inputValue('provinceItem')}
-                                    value={info.provinceItem}
+                                    value={provinceItem}
                                 >
                                     <option value='' disabled>
                                         เลือกจังหวัด
@@ -161,7 +189,7 @@ const ReportMissing = () => {
                                 <input
                                     type="date"
                                     onChange={inputValue('date')}
-                                    value={info.date}
+                                    value={date}
                                     className='dropdown-toggle date'
                                 />
                                 <label className="custom-dropdown-label">วัน *</label>
@@ -169,7 +197,7 @@ const ReportMissing = () => {
                             <div className="custom-input-container">
                                 <input
                                     type="text"
-                                    value={info.cause}
+                                    value={cause}
                                     onChange={inputValue('cause')}
                                     className="custom-input"
                                     placeholder=" "
@@ -182,7 +210,7 @@ const ReportMissing = () => {
                         <h3>ภาพของผู้สูญหาย</h3>
                         <div className="custom-input-container">
                             <textarea
-                                value={info.etc}
+                                value={etc}
                                 onChange={inputValue('etc')}
                                 className="custom-textarea"
                                 placeholder=" "

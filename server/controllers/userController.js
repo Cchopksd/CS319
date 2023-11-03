@@ -108,3 +108,13 @@ exports.getUserLogin = async (req,res) => {
         res.status(400).json({error: err})
     })
 }
+
+// เอา id ของ member
+exports.getUserId = async (req,res) => {
+    const { user } = req.body
+    await Member.findOne({email: user}).then((userInfo) => {
+        res.status(200).json(userInfo._id)
+    }).catch((err) => {
+        res.status(400).json({error: err})
+    })
+}

@@ -26,10 +26,6 @@ const missingRequestSchema = mongoose.Schema({
         type : String,
         require : true
     },
-    missing_fname : {
-        type : String,
-        require : true
-    },
     missing_date : {
         type : String,
         require : true
@@ -60,7 +56,7 @@ const missingRequestSchema = mongoose.Schema({
     },
     missing_status : {
         type : String,
-        default : ""
+        default : "กำลังตรวจสอบ"
     },
 } ,{timestamps: true})
 
