@@ -85,3 +85,43 @@ exports.sendRequest = async(req,res) => {
         })
     }
 }
+
+// เมื่อ เข้าสู่หน้าคนหาย
+exports.getAllPost = async(req,res) => {
+    await MissingRequest.find({missing_status : "สูญหาย"}).sort({ createdAt: -1 }).then((posts) => {
+        res.status(200).json(posts)
+    }).catch((err) => {
+        return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
+    })
+}
+
+// เมื่อ ค้นหา
+exports.getSearchPost = async (req,res) => {
+    const { searchKeyword } = req.body
+    
+    let keyword = false
+
+    let query = { missing_status: "สูญหาย" };
+
+    if (searchKeyword) {
+        keyword = true
+        query = {
+            ...query,
+            $or: [
+                { missing_fname: { $regex: searchKeyword, $options: "i" } },
+                { missing_lname: { $regex: searchKeyword, $options: "i" } },
+            ],
+        };
+        }
+
+    // console.log(keyword)
+
+    if (keyword) {
+        const posts = await MissingRequest.find(query).sort({ createdAt: -1 })
+        res.status(200).json(posts)
+    }
+    else {
+        const posts = await MissingRequest.find({missing_status : "สูญหาย"}).sort({ createdAt: -1 })
+        res.status(200).json(posts)
+    }
+}
