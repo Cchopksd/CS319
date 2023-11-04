@@ -7,6 +7,7 @@ import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { getUserId } from '../../services/authorize';
 import { useNavigate } from 'react-router-dom';
+import ImageUploaderReport from '../../components/ImageUploaderReport';
 
 const ReportMissing = () => {
 
@@ -62,7 +63,30 @@ const ReportMissing = () => {
         }
         // กรณีที่มีรูปด้วย
         if (images.length > 0) {
-            console.log('kuy')
+            for (let i = 0; i < images.length; i++) {
+                const img = images[i];
+                const data = new FormData()
+                    data.append("file", img.file)
+                    data.append("upload_preset", "hopeland")
+                    data.append("cloud_name", "dp5dpfuin")
+                    try {
+                        const response = await axios.post("https://api.cloudinary.com/v1_1/dp5dpfuin/image/upload/", data);
+                        const imageUrl = response.data.url.toString();
+                        if (i === 0 && image1 === "") {
+                            setImage1(imageUrl);
+                        } else if (i === 1 && image2 === "") {
+                            setImage2(imageUrl);
+                        } else if (i === 2 && image3 === "") {
+                            setImage3(imageUrl);
+                        } else if (i === 3 && image4 === "") {
+                            setImage4(imageUrl);
+                        }
+                    } catch (error) {
+                        setLoading(false)
+                        Swal.fire('แจ้งเตือน', error.message, 'error');
+                    }
+            }
+            setUploadImg(true)
         }
         // กรณีไม่ได้แนบรูปมา
         else {
@@ -84,18 +108,30 @@ const ReportMissing = () => {
                     )
                 })
         }
-
-        // setInfo({
-        //     name: '',
-        //     surname: '',
-        //     address: '',
-        //     gender: '',
-        //     provinceItem: '',
-        //     date: '',
-        //     cause: '',
-        //     etc: ''
-        // });
     };
+
+    // ถ้าแนบรูปมาด้วยตอนส่ง
+    useEffect(() => {
+        if (uploadImg) {
+            axios.post(`${import.meta.env.VITE_APP_API}/send-request`, {loginUser, name, surname, address, gender, provinceItem, 
+                date, cause, etc, image1, image2, image3 }).then(async(res) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        res.data.message,
+                        'success'
+                    )
+                    navigate(`/`)
+                }).catch(async (err) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        err.response.data.error,
+                        'error'
+                    )
+                })
+        }
+    },[uploadImg])
 
     const inputValue = (name) => (event) => {
         setInfo({ ...info, [name]: event.target.value });
@@ -129,6 +165,10 @@ const ReportMissing = () => {
         { value: 'male', label: 'ชาย' },
         { value: 'female', label: 'หญิง' },
     ]);
+
+    const handleDataFromChild = (data) => {
+        setImages(data)
+    }
 
     return (
         <div className='missing-report-page'>
@@ -233,6 +273,7 @@ const ReportMissing = () => {
                     </section>
                     <section>
                         <h3>ภาพของผู้สูญหาย</h3>
+                        <ImageUploaderReport onDataSend={handleDataFromChild}/>
                         <div className="custom-input-container">
                             <textarea
                                 value={etc}
