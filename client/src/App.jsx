@@ -13,6 +13,7 @@ import FindMissing from './pages/user/FindMissing';
 import Donation from './pages/user/Donation';
 import AdministratorPage from './pages/admin/AdministratorPage';
 import AdminSinglePage from './pages/admin/AdminSinglePage';
+import MemberRoute from './MemberRoute';
 
 const App = () => {
   return (
@@ -22,7 +23,7 @@ const App = () => {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/missing-profile' element={<MissingProfile/>}/>
-        <Route path='/report-missing' element={<ReportMissing/>}/>
+        <Route path='/report-missing' element={<MemberRoute Component={ReportMissing}/>}/>
         <Route path='/find-missing' element={<FindMissing/>}/>
         <Route path='/donation' element={<Donation/>}/>
         <Route path='/administrator' element={<AdministratorPage/>}/>

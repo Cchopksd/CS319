@@ -54,7 +54,7 @@ export const Login = () => {
                         </div>
                         <div className="customx-input-container">
                             <input
-                                type="text"
+                                type="password"
                                 className="customx-input"
                                 placeholder=" "
                                 value={pass}
