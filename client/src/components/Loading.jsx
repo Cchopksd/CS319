@@ -1,5 +1,5 @@
 import { BounceLoader } from "react-spinners";
-import './Loading.css';
+import './css/Loading.css';
 
 const Loading = () => {
     return (
