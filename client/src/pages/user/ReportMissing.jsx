@@ -8,6 +8,7 @@ import Footer from '../../components/Footer';
 import { getUserId } from '../../services/authorize';
 import { useNavigate } from 'react-router-dom';
 import ImageUploaderReport from '../../components/ImageUploaderReport';
+import Loading from '../../components/Loading';
 
 const ReportMissing = () => {
 
@@ -172,6 +173,7 @@ const ReportMissing = () => {
 
     return (
         <div className='missing-report-page'>
+            {loading && <Loading/>}
             <Navbar />
             <main className='missing-report-container'>
                 <form className='missing-report-container-center' onSubmit={sendReport}>
