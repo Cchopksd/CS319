@@ -6,11 +6,12 @@ import Swal from 'sweetalert2'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { getUserId } from '../../services/authorize';
+import { useNavigate } from 'react-router-dom';
 
 const ReportMissing = () => {
 
-    // state ของ ผู้ที่จะทำการสร้างประกาศ
-    const [loginUser, setLoginUser] = useState("")
+    // redirect หน้า
+    const navigate = useNavigate()
 
     const [info, setInfo] = useState({
         name: '',
@@ -25,6 +26,8 @@ const ReportMissing = () => {
 
     const { name, surname, address, gender, provinceItem, date, cause, etc } = info
 
+     // state ของ ผู้ที่จะทำการสร้างประกาศ
+    const [loginUser, setLoginUser] = useState("")
 
     // รูปที่จะส่งไปยัง server
     const [image1, setImage1] = useState("")
@@ -46,8 +49,10 @@ const ReportMissing = () => {
 
     const sendReport = async (e) => {
         e.preventDefault();
+        setLoading(true)
 
         if (name == "" || surname == "" || address == "" || gender == "" || provinceItem == "" || date == "" || cause == "" || etc == "") {
+            setLoading(false)
             await Swal.fire(
                 'แจ้งเตือน',
                 'กรุณากรอกข้อมูลให้ครบถ้วน',
@@ -55,22 +60,41 @@ const ReportMissing = () => {
             )
             return
         }
-        await Swal.fire({
-            title: 'แบบฟอร์มถูกส่งเรียบร้อยแล้ว',
-            width: 600,
-            padding: '3em',
-            color: '#716add',
-        })
-        setInfo({
-            name: '',
-            surname: '',
-            address: '',
-            gender: '',
-            provinceItem: '',
-            date: '',
-            cause: '',
-            etc: ''
-        });
+        // กรณีที่มีรูปด้วย
+        if (images.length > 0) {
+            console.log('kuy')
+        }
+        // กรณีไม่ได้แนบรูปมา
+        else {
+            await axios.post(`${import.meta.env.VITE_APP_API}/send-request`, {loginUser, name, surname, address, gender, provinceItem, 
+                date, cause, etc, image1, image2, image3 }).then(async(res) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        res.data.message,
+                        'success'
+                    )
+                    navigate(`/`)
+                }).catch(async (err) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        err.response.data.error,
+                        'error'
+                    )
+                })
+        }
+
+        // setInfo({
+        //     name: '',
+        //     surname: '',
+        //     address: '',
+        //     gender: '',
+        //     provinceItem: '',
+        //     date: '',
+        //     cause: '',
+        //     etc: ''
+        // });
     };
 
     const inputValue = (name) => (event) => {
@@ -96,6 +120,7 @@ const ReportMissing = () => {
             })
     }
 
+    // เมื่อเข้าสู่หน้า
     useEffect(() => {
         loadData()
     }, [])
