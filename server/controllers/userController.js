@@ -11,9 +11,9 @@ exports.signup = async(req,res) => {
 
     let slug = uuidv4()
 
-    if (!fname || !lname || !password || !email || !phone || !confirmPassword) {
-        return res.status(400).json({error: "กรุณากรอกข้อมูลให้ครบ"})
-    }
+    // if (!fname || !lname || !password || !email || !phone || !confirmPassword) {
+    //     return res.status(400).json({error: "กรุณากรอกข้อมูลให้ครบ"})
+    // }
 
     const emailExist = await Member.findOne({email:email});
 
