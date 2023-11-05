@@ -27,7 +27,7 @@ const App = () => {
         <Route path='/find-missing' element={<FindMissing/>}/>
         <Route path='/donation' element={<Donation/>}/>
         <Route path='/administrator' element={<AdministratorPage/>}/>
-        <Route path='/administrator/person-info' element={<AdminSinglePage/>}/>
+        <Route path='/administrator/person-info/:slug' element={<AdminSinglePage/>}/>
       </Routes>
     </>
   )
