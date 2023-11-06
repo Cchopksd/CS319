@@ -33,6 +33,8 @@ exports.deleteRequire = async(req, res) => {
     })
 }
 
+
+
 exports.updateStatus = async(req, res) => {
     const { missing_slug } = req.params
     const { missing_status } = req.body
