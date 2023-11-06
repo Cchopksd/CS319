@@ -58,6 +58,7 @@
     width: 100%;
     height: 100%;
     border-radius: 5px;
+    object-fit: cover;
 }
 .report-img-upl-card .report-img-upl-container .report-upl-image span {
     position: absolute;

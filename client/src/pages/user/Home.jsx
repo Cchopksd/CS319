@@ -5,10 +5,14 @@ import { MdOutlineModeComment } from 'react-icons/md'
 import { useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
+import axios from 'axios'
 
 const Home = () => {
     // redirect
     const navigate = useNavigate()
+
+    // array ของ post
+    const [postArray, setPostArray] = useState([])
 
     const dummyData = [
         {
@@ -91,13 +95,34 @@ const Home = () => {
         }
     ]
 
+    // format date thai
+    const formatDate = (dateString) => {
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC'
+        };
+    
+        const date = new Date(dateString);
+        const formatter = new Intl.DateTimeFormat('th-TH', options);
+        return formatter.format(date);
+    }
+
     // พื้นหลัง
     useEffect(() => {
+        loadData()
         document.body.classList.add('home-page');
         return () => {
             document.body.classList.remove('home-page');
         };
     }, []);
+
+    const loadData = async () => {
+        await axios.get(`${import.meta.env.VITE_APP_API}/get-home-post`).then((res) => {
+            setPostArray(res.data)
+        })
+    }
 
     //ไปหน้ารายงาน
     const handleGoReport = () => {
@@ -146,42 +171,42 @@ const Home = () => {
             <div className="home-missing-box">
                 <label className="home-missing-title">ผู้สูญหายกรณีล่าสุด</label>
                 <div className="home-missing-latest-box">
-                {dummyData.map((item) => (
-                            <div className="home-card" key={item.fname} onClick={handleGoProfile}>
-                                <img src={item.photo} alt=""/>
+                {postArray.map((item) => (
+                            <div className="home-card" key={item._id} onClick={handleGoProfile}>
+                                <img src={item.missing_photo1} alt=""/>
                                 <div className="home-info-box">
                                     <div className="home-card-row-1">
-                                        <label>{item.postDate}</label>
+                                        <label>{formatDate(item.updatedAt)}</label>
                                         <div className="home-card-status">
-                                            {item.status}
+                                            {item.missing_status}
                                         </div>
                                     </div>
                                     <div className="home-card-row-2">
-                                        <label>{item.fname}&ensp;</label>
-                                        <label>{item.lname}&ensp;</label>
-                                        <label>{`(${item.gender})`}</label>
+                                        <label>{item.missing_fname}&ensp;</label>
+                                        <label>{item.missing_lname}&ensp;</label>
+                                        <label>{`(${item.missing_gender})`}</label>
                                     </div>
                                     <div className="home-card-row-3">
                                         <div className="home-card-place">
                                             <label>สูญหายที่ :</label>
-                                            <label> {item.position.length > 15 ? item.position.slice(0, 15) + "..." : item.position}</label>
+                                            <label> {item.missing_position.length > 15 ? item.missing_position.slice(0, 15) + "..." : item.missing_position}</label>
                                         </div>
                                         <div className="home-card-cause">
                                             <label>สาเหตุการหาย :</label>
-                                            <label> {item.cause.length > 15 ? item.cause.slice(0, 15) + "..." : item.cause}</label>
+                                            <label> {item.missing_cause.length > 15 ? item.missing_cause.slice(0, 15) + "..." : item.missing_cause}</label>
                                         </div>
                                         <div className="home-card-date">
                                             <label>วันที่รายงานการสูญหาย :</label>
-                                            <label> {item.reportDate}</label>
+                                            <label> {formatDate(item.createdAt)}</label>
                                         </div>
                                     </div>
                                     <div className="home-card-row-4">
                                         <div className="home-card-province">
-                                            {item.country}
+                                            {item.missing_province}
                                         </div>
                                         <div className="home-card-clue">
                                             <MdOutlineModeComment size={20} className="home-card-clue-icon"/>
-                                            {item.totalClue}
+                                            20
                                         </div>
                                     </div>
                                 </div>

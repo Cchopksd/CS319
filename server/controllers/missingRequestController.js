@@ -125,3 +125,11 @@ exports.getSearchPost = async (req,res) => {
         res.status(200).json(posts)
     }
 }
+
+exports.getHomePost = async (req,res) => {
+    await MissingRequest.find({missing_status : "สูญหาย"}).sort({ createdAt: -1 }).limit(6).then((posts) => {
+        res.status(200).json(posts)
+    }).catch((err) => {
+        return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
+    })
+}
