@@ -9,6 +9,7 @@ import { getUserId } from '../../services/authorize';
 import { useNavigate } from 'react-router-dom';
 import ImageUploaderReport from '../../components/ImageUploaderReport';
 import Loading from '../../components/Loading';
+import { MdOutlineModeComment } from 'react-icons/md'
 
 const ReportMissing = () => {
 
@@ -45,9 +46,9 @@ const ReportMissing = () => {
     // state เช็คว่า fetch api
     const [loading, setLoading] = useState(false)
 
-    //กำหนด maximum ของ json ที่ส่งเข้ามา
-    const maxItemsToDisplay = 2;
-    const limitedData = stockData.slice(0, maxItemsToDisplay);
+    // state ของ คนหายล่าสุด
+    const [postArray, setPostArray] = useState([])
+
 
     const sendReport = async (e) => {
         e.preventDefault();
@@ -155,6 +156,16 @@ const ReportMissing = () => {
             }).catch(err => {
                 console.log(err)
             })
+        // โหลดคนหายล่่าสุด
+        await axios.get(`${import.meta.env.VITE_APP_API}/get-report-post`).then((res) => {
+            setPostArray(res.data)
+        }).catch((err) => {
+            Swal.fire(
+                'แจ้งเตือน',
+                err.response.data.error,
+                'error'
+            )
+        })
     }
 
     // เมื่อเข้าสู่หน้า
@@ -169,6 +180,20 @@ const ReportMissing = () => {
 
     const handleDataFromChild = (data) => {
         setImages(data)
+    }
+
+    // format date thai
+    const formatDate = (dateString) => {
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC'
+        };
+    
+        const date = new Date(dateString);
+        const formatter = new Intl.DateTimeFormat('th-TH', options);
+        return formatter.format(date);
     }
 
     return (
@@ -290,31 +315,47 @@ const ReportMissing = () => {
                 </form>
                 <aside className='lasted-side'>
                     <h3>ผู้สูญหายล่าสุด</h3>
-                    {limitedData.map((data, key) => {
-                        return (
-                            <div className='lasted-container' key={key}>
-                                <img className='lasted-image' src={data.img1} alt="" />
-                                <div className='lasted-info-inside'>
-                                    <div className='lasted-info-head'>
-                                        <label className='lasted-info-date'>{data.date}</label>
-                                        <div
-                                            className={`lasted-status
-                                            ${data.status ? 'found' : 'not-found'}
-                                            `}>
-                                            {data.status ? 'พบแล้ว' : 'สูญหาย'}
+                    {postArray.map((item) => (
+                            <div className="report-card" key={item._id}>
+                                <img src={item.missing_photo1 == "" ? "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y=" : item.missing_photo1} alt=""/>
+                                <div className="report-info-box">
+                                    <div className="report-card-row-1">
+                                        <label>{formatDate(item.updatedAt)}</label>
+                                        <div className="report-card-status">
+                                            {item.missing_status}
                                         </div>
                                     </div>
-                                    <label>{data.name}</label>
-                                    <div className='lasted-info-missing'>
-                                        <label className='lasted-info-etc'>สูญหายที่: {data.address}</label>
-                                        <label className='lasted-info-etc'>สาเหตุการสูญหาย: {data.cause}</label>
-                                        <label className='lasted-info-etc'>มีการรายงานการสูญหายวันที่: {data.dateUpdate}</label>
-                                        <label className='lasted-info-etc info-province'>{data.province}</label>
+                                    <div className="report-card-row-2">
+                                        <label>{item.missing_fname}&ensp;</label>
+                                        <label>{item.missing_lname}&ensp;</label>
+                                        <label>{`(${item.missing_gender})`}</label>
+                                    </div>
+                                    <div className="report-card-row-3">
+                                        <div className="report-card-place">
+                                            <label>สูญหายที่ :</label>
+                                            <label> {item.missing_position.length > 15 ? item.missing_position.slice(0, 15) + "..." : item.missing_position}</label>
+                                        </div>
+                                        <div className="report-card-cause">
+                                            <label>สาเหตุการหาย :</label>
+                                            <label> {item.missing_cause.length > 15 ? item.missing_cause.slice(0, 15) + "..." : item.missing_cause}</label>
+                                        </div>
+                                        <div className="report-card-date">
+                                            <label>วันที่รายงานการสูญหาย :</label>
+                                            <label> {formatDate(item.createdAt)}</label>
+                                        </div>
+                                    </div>
+                                    <div className="report-card-row-4">
+                                        <div className="report-card-province">
+                                            {item.missing_province}
+                                        </div>
+                                        <div className="report-card-clue">
+                                            <MdOutlineModeComment size={20} className="report-card-clue-icon"/>
+                                            20
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        )
-                    })}
+                        </div>
+                        ))}
                 </aside>
             </main>
             <Footer />

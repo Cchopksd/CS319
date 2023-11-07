@@ -126,8 +126,18 @@ exports.getSearchPost = async (req,res) => {
     }
 }
 
+// ของหน้า home
 exports.getHomePost = async (req,res) => {
     await MissingRequest.find({missing_status : "สูญหาย"}).sort({ createdAt: -1 }).limit(6).then((posts) => {
+        res.status(200).json(posts)
+    }).catch((err) => {
+        return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
+    })
+}
+
+// ของหน้า Report
+exports.getReportPost = async (req,res) => {
+    await MissingRequest.find({missing_status : "สูญหาย"}).sort({ createdAt: -1 }).limit(2).then((posts) => {
         res.status(200).json(posts)
     }).catch((err) => {
         return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
