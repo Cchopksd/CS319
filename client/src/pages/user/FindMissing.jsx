@@ -10,6 +10,7 @@ import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import axios from 'axios'
 import Swal from "sweetalert2";
+import Loading from '../../components/Loading'
 
 const FindMissing = () => {
 
@@ -21,6 +22,9 @@ const FindMissing = () => {
 
     // state ของ search
     const [searchKeyword, setSearchKeyword] = useState("")
+
+    // เปิด footer
+    const [activeFooter, setActiveFooter] = useState(false)
 
     // เมื่อเข้าสู่หน้า
     useEffect(() => {
@@ -35,88 +39,6 @@ const FindMissing = () => {
 
     // redirect
     const navigate = useNavigate()
-
-    // ข้อมูล dummy
-    const dummyData = [
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        }
-    ]
 
     // ย้อนกลับหน้า
     const handleBack = () => {
@@ -142,8 +64,10 @@ const FindMissing = () => {
     }
 
     const handleSearch = async () => {
+        setLoading(true)
         await axios.post(`${import.meta.env.VITE_APP_API}/get-search-post`, {searchKeyword}).then(async (res) => {
             if (res.data.length === 0) {
+                setLoading(false)
                 Swal.fire(
                     'แจ้งเตือน',
                     'ไม่พบข้อมูลผู้สูญหาย',
@@ -152,7 +76,9 @@ const FindMissing = () => {
                 return
             }
             else {
+                setLoading(false)
                 setPostArray(res.data)
+                setActiveFooter(true)
             }
         })
     }
@@ -160,6 +86,7 @@ const FindMissing = () => {
     return (
         <>
         <div>
+            { loading && <Loading/>}
             <Navbar/>
             <div className="find-back-box" onClick={handleBack}>
                 <IoIosArrowBack size={60}/>
