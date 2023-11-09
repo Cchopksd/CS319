@@ -17,7 +17,7 @@
 
 .single-data-container-header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     flex: 1;
 }
 
