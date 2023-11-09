@@ -1,9 +1,11 @@
 .single-data-layout {
     display: flex;
+    justify-content: center;
     width: 1200px;
 }
 
 .single-data-container {
+    width: 1200px;
     margin: 150px 0px 100px 100px;
 }
 
@@ -35,8 +37,13 @@
     flex-direction: column;
 }
 
+.cursor-status {
+    cursor: pointer;
+}
+
 .single-data-group-img {
     display: flex;
+    justify-content: center;
     gap: 1.5rem;
     width: 410px;
 }

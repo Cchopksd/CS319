@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 
 
 exports.sendRequest = async(req,res) => {
-    console.log(req.body)
+    // console.log(req.body)
     // destructuring
     const { loginUser, name, surname, address, gender, provinceItem, date, cause, etc, image1, image2, image3 } = req.body
 

@@ -34,9 +34,15 @@ exports.deleteRequire = async(req, res) => {
 }
 
 
-
 exports.updateStatus = async(req, res) => {
     const { missing_slug } = req.params
-    const { missing_status } = req.body
-    
+    const { missingStatus } = req.body
+    console.log(missingStatus)
+    await MissingRequest.findOneAndUpdate({ missing_slug },{
+        missing_status: missingStatus
+    }, {new:true}).then((missingInfo) => {
+        res.status(200).json({missingInfo})
+    }).catch((err) => {
+        res.status(400).json({error: err})
+    })
 }
