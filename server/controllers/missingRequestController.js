@@ -143,3 +143,12 @@ exports.getReportPost = async (req,res) => {
         return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
     })
 }
+
+exports.getSinglePost = async (req,res) => {
+    const { slug } = req.body
+    await MissingRequest.findOne({missing_slug : slug}).then((post) => {
+        res.status(200).json(post)
+    }).catch((err) => {
+        return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
+    })
+}

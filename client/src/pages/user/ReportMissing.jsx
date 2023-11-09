@@ -6,7 +6,7 @@ import Swal from 'sweetalert2'
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import { getUserId } from '../../services/authorize';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import ImageUploaderReport from '../../components/ImageUploaderReport';
 import Loading from '../../components/Loading';
 import { MdOutlineModeComment } from 'react-icons/md'
@@ -316,6 +316,7 @@ const ReportMissing = () => {
                 <aside className='lasted-side'>
                     <h3>ผู้สูญหายล่าสุด</h3>
                     {postArray.map((item) => (
+                        <Link to={`/missing-profile/${item.missing_slug}`} style={{textDecoration: 'none', color: 'inherit'}}> 
                             <div className="report-card" key={item._id}>
                                 <img src={item.missing_photo1 == "" ? "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y=" : item.missing_photo1} alt=""/>
                                 <div className="report-info-box">
@@ -355,6 +356,7 @@ const ReportMissing = () => {
                                     </div>
                                 </div>
                         </div>
+                        </Link>
                         ))}
                 </aside>
             </main>
