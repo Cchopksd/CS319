@@ -4,8 +4,17 @@ import './css/MissingClue.css'
 import { IoSend } from 'react-icons/io5'
 import { GrCamera } from 'react-icons/gr'
 import { BsDot } from 'react-icons/bs'
+import ImageUploaderClue from '../../components/ImageUploaderClue'
 
 const MissingClue = () => {
+
+    // รูปที่จะส่งไปยัง server
+    const [image1, setImage1] = useState("")
+    const [image2, setImage2] = useState("")
+    const [image3, setImage3] = useState("")
+
+    //  state เก็บชุดรูปที่มาจาก child
+    const [images, setImages] = useState([])
 
     const dummyData = [
         {
@@ -49,10 +58,16 @@ const MissingClue = () => {
             cluePhoto3 : ""
         },
     ]
-    return (
-        // <div>
 
-        // </div>
+    const handleDataFromChild = (data) => {
+        setImages(data)
+    }
+
+    const handleClue = () => {
+        console.log()
+    }
+
+    return (
         <div className='missClue-container'>
             <hr/>
             <div className='missClue-writeComment-box'>
@@ -60,8 +75,11 @@ const MissingClue = () => {
                 <div className='missClue-input-box'>
                     <textarea className='missClue-input' placeholder='คุณมีเบาะแสหรอ? มาแบ่งปันกันเถอะ...'/>
                     <div className='missClue-input-footer-box'>
-                        <GrCamera size={20}/>
-                        <IoSend size={20}/>
+                        {/* <GrCamera size={20}/> */}
+                        <div style={{width: '100%'}}>
+                            <ImageUploaderClue onDataSend={handleDataFromChild}/>
+                        </div>
+                        <IoSend size={20} style={{margin: '0 0 0 30px'}} onClick={handleClue}/>
                     </div>
                 </div>
             </div>
