@@ -225,6 +225,17 @@
     pointer-events: none;
 }
 
+.custom-textarea {
+    padding: 15px;
+    width: 640px;
+    height: 100px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    display: flex;
+    resize: none !important;
+}
+
 .custom-textarea:focus+.custom-textarea-label,
 .custom-textarea:not(:placeholder-shown)+.custom-textarea-label {
     transform: translateY(-50%);
@@ -234,25 +245,6 @@
     background-color: #fff;
 }
 
-/* @media screen and (min-width: 950px) and (max-width : 1250px) {
-    .missing-report-container{
-        display: flex;
-        flex-direction: column;
-        width: 400px;
-        margin: 100px auto;
-        align-items: center;
-    }
-    .custom-input {
-        padding-left: 15px;
-        width: 100px;
-        height: 40px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        display: flex;
-        gap: 5em;
-    }
-} */
 .report-card {
     margin: 30px auto;
     display: flex;
@@ -333,6 +325,22 @@
 }
 .report-card-clue-icon {
     margin: 0 10px 0 0;
+}
+
+@media screen and (min-width: 950px) and (max-width : 1250px) {
+/* 
+    .missing-report-page {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+    } */
+
+    .missing-report-container{
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+    }
 }
 
 @media screen and (min-width: 0px) and (max-width : 950px) {
@@ -446,14 +454,8 @@
 
 
     .custom-textarea {
-        padding: 15px;
         width: 335px;
         height: 100px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        display: flex;
-        resize: none !important;
     }
 
 }
