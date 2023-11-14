@@ -82,6 +82,24 @@ const AdministratorPage = () => {
         return missingRequire.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, missingRequire]);
 
+    const personStatus = (missingStatus) => {
+        let classStatus, textStatus;
+
+        if (user.missing_status === 'พบแล้ว') {
+            classStatus = 'admin-person-found';
+            textStatus = 'พบแล้ว';
+        } else if (user.missing_status === 'กำลังตรวจสอบ') {
+            classStatus = 'admin-person-verifying';
+            textStatus = 'กำลังตรวจสอบ';
+        } else if (user.missing_status === 'ตาย') {
+            classStatus = 'admin-person-dead';
+            textStatus = 'ตาย';
+        } else {
+            classStatus = 'admin-person-not-found';
+            textStatus = 'สูญหาย';
+        }
+    }
+
 
     return (
         <div className='admin-screen'>
@@ -129,10 +147,17 @@ const AdministratorPage = () => {
                                         <td className='table-field'>{user.missing_date}</td>
                                         <td className='table-field'>{user.missing_cause}</td>
                                         <td className='table-field'>
-                                            <div className={`admin-person-status
-                                                ${user.missing_status === 'พบแล้ว' ? 'admin-person-found' : user.missing_status === 'กำลังตรวจสอบ' ? 'admin-person-verifying' : user.missing_status === 'ตาย' ? 'admin-person-dead' : 'admin-person-not-found'}`}>
-                                                {user.missing_status === 'พบแล้ว' ? 'พบแล้ว' : user.missing_status === 'กำลังตรวจสอบ' ? 'กำลังตรวจสอบ' : user.missing_status === 'ตาย' ? 'ตาย' : 'สูญหาย'}
-                                            </div>
+                                        <div className={`admin-person-status
+                                            ${user.missing_status === 'พบแล้ว' ? 'admin-person-found' :
+                                                user.missing_status === 'กำลังตรวจสอบ' ? 'admin-person-verifying' :
+                                                user.missing_status === 'เสียชีวิต' ? 'admin-person-dead' :
+                                                user.missing_status === 'สูญหาย' ? 'admin-person-not-found' : ''}`}>
+                                            {user.missing_status === 'พบแล้ว' ? 'พบแล้ว' :
+                                                user.missing_status === 'กำลังตรวจสอบ' ? 'กำลังตรวจสอบ' :
+                                                user.missing_status === 'เสียชีวิต' ? 'เสียชีวิต' :
+                                                user.missing_status === 'สูญหาย' ? 'สูญหาย' : ''}
+                                        </div>
+
                                         </td>
                                         <td className=''><Link to={`/administrator/person-info/${user.missing_slug}`} className='admin-verify-button'>ตรวจสอบ</Link></td>
                                         <td className=''><button className='admin-bt-delete' onClick={() => confirmDelete(user.missing_slug)}><LiaTrashAlt /></button></td>
