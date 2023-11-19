@@ -5,7 +5,120 @@ import { IoSend } from 'react-icons/io5'
 import { GrCamera } from 'react-icons/gr'
 import { BsDot } from 'react-icons/bs'
 
-const MissingClue = () => {
+const MissingClue = ({missingid}) => {
+
+    const [comment,setComment] = useState("")
+
+    // state ของ ผู้ที่จะทำการสร้างประกาศ
+    const [loginUser, setLoginUser] = useState("")
+
+
+    // รูปที่จะส่งไปยัง server
+    const [image1, setImage1] = useState("")
+    const [image2, setImage2] = useState("")
+    const [image3, setImage3] = useState("")
+    // เช็คว่าแนบรูปไหม
+    const [uploadImg, setUploadImg] = useState(false)
+
+    // state เช็คว่า fetch api
+    const [loading, setLoading] = useState(false)
+    
+    const sendComment = async (e) => {
+        e.preventDefault();
+        setLoading(true)
+
+        if (comment == "") {
+            setLoading(false)
+            await Swal.fire(
+                'แจ้งเตือน',
+                'กรุณากรอกข้อมูลให้ครบถ้วน',
+                'error'
+            )
+            return
+        }
+        // กรณีที่มีรูปด้วย
+        if (images.length > 0) {
+            for (let i = 0; i < images.length; i++) {
+                const img = images[i];
+                const data = new FormData()
+                    data.append("file", img.file)
+                    data.append("upload_preset", "hopeland")
+                    data.append("cloud_name", "dp5dpfuin")
+                    try {
+                        const response = await axios.post("https://api.cloudinary.com/v1_1/dp5dpfuin/image/upload/", data);
+                        const imageUrl = response.data.url.toString();
+                        if (i === 0 && image1 === "") {
+                            setImage1(imageUrl);
+                        } else if (i === 1 && image2 === "") {
+                            setImage2(imageUrl);
+                        } else if (i === 2 && image3 === "") {
+                            setImage3(imageUrl);
+                        } else if (i === 3 && image4 === "") {
+                            setImage4(imageUrl);
+                        }
+                    } catch (error) {
+                        setLoading(false)
+                        Swal.fire('แจ้งเตือน', error.message, 'error');
+                    }
+            }
+            setUploadImg(true)
+        }
+        // กรณีไม่ได้แนบรูปมา
+        else {
+            await axios.post(`${import.meta.env.VITE_APP_API}/postcomment`, {loginUser ,missingid ,comment ,image1 ,image2 ,image3 }).then(async(res) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        res.data.message,
+                        'success'
+                    )
+                    navigate(`/`)
+                }).catch(async (err) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        err.response.data.error,
+                        'error'
+                    )
+                })
+        }
+    };
+
+    // ถ้าแนบรูปมาด้วยตอนส่ง
+    useEffect(() => {
+        if (uploadImg) {
+            axios.post(`${import.meta.env.VITE_APP_API}/postcomment`, {loginUser ,missingid ,comment ,image1 ,image2 ,image3 }).then(async(res) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        res.data.message,
+                        'success'
+                    )
+                    navigate(`/`)
+                }).catch(async (err) => {
+                    setLoading(false)
+                    await Swal.fire(
+                        'แจ้งเตือน',
+                        err.response.data.error,
+                        'error'
+                    )
+                })
+        }
+    },[uploadImg])
+
+    const loadData = async (event) => {
+        // ดึงข้อมูล id ของผู้ใช้งาน
+        try{
+            const id = await getUserId()
+            setLoginUser(id.data)
+        }catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        loadData()
+    }, [])
 
     const dummyData = [
         {

@@ -1,11 +1,15 @@
 const mongoose = require('mongoose');
 
-
 const postCommentSchema = mongoose.Schema({
     missing_id : {
         type : mongoose.Schema.Types.ObjectId,
         required: true,
         ref: "MissingRequests"
+    },
+    usercomment_id : {
+        type : mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref : "Users"
     },
     clue_comment : {
         type : String,

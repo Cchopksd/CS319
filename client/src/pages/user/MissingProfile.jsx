@@ -34,6 +34,7 @@ const MissingProfile = () => {
     const [image1, setImage1] = useState('')
     const [image2, setImage2] = useState('')
     const [image3, setImage3] = useState('')
+    const [missingid, setMissingId] = useState('')
 
     // const [status, setStatus] = useState(true)
 
@@ -51,6 +52,7 @@ const MissingProfile = () => {
     const loadData = async () => {
         const slug = params.slug
         await axios.post(`${import.meta.env.VITE_APP_API}/get-single-post`, {slug}).then((res) => {
+            setMissingId(res.data._id)
             setName(res.data.missing_fname)
             setSurname(res.data.missing_lname)
             setGender(res.data.missing_gender)
@@ -154,7 +156,7 @@ const MissingProfile = () => {
                                     เบาะแส
                                 </button>
                             </div>
-                            {activeButton === 'button-info' ? <MissingInfo position={position} description={description}/> : <MissingClue />}
+                            {activeButton === 'button-info' ? <MissingInfo position={position} description={description}/> : <MissingClue missingid={missingid} />}
                         </div>
                 </div>
             </div>
