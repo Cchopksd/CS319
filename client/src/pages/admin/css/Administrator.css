@@ -24,10 +24,10 @@
 
 .admin-search-data {
     display: flex;
-    width: 1300px;
+    width: 800px;
     height: 85px;
     gap: 2rem;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     border-radius: 6px;
     box-shadow: 0px 6px 12px 0px rgba(4, 9, 33, 0.08);

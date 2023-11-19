@@ -16,7 +16,7 @@ const AdminSinglePage = () => {
         navigate(-1)
     }
 
-    const [missingData, setMissingData] = useState('')
+    const [missingData, setMissingData] = useState([])
     const [missingStatus, setMissingStatus] = useState('');
 
     const fetchData = () =>{

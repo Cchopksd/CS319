@@ -14,12 +14,15 @@ const AdministratorPage = () => {
     const [provinceList, setProvinceList] = useState([])
     const PageSize = 10;
     const [currentPage, setCurrentPage] = useState(1);
-    const [value, setValue] = useState('สถานะ');
+    const [name, setName] = useState('')
+    const [searchTerm, setSearchTerm] = useState('');
 
     const fetchData = () => {
         axios.get(`${import.meta.env.VITE_APP_API}/admin`)
             .then((response) => {
+                // console.log(response.data);
                 setMissingRequire(response.data);
+
             })
             .catch((err) => {
                 alert(err.message);
@@ -28,14 +31,15 @@ const AdministratorPage = () => {
 
     useEffect(() => {
         fetchData();
+        loadData();
     }, [])
 
     const deleteRequire = (slug) => {
         axios.delete(`${import.meta.env.VITE_APP_API}/admin/${slug}`)
-        .then((response) =>{
-            Swal.fire('แจ้งเตือน', response.data.message, "success")
-            fetchData();
-        }).catch(err => alert(err));
+            .then((response) => {
+                Swal.fire('แจ้งเตือน', response.data.message, "success")
+                fetchData();
+            }).catch(err => alert(err));
     }
 
     const confirmDelete = (slug) => {
@@ -58,9 +62,19 @@ const AdministratorPage = () => {
                 console.log(err)
             })
     }
-    useEffect(() => {
-        loadData()
-    }, [])
+
+    const handleSearch = () => {
+        if (searchTerm === '') {
+            fetchData();
+        } else {
+            const filteredData = missingRequire.filter(user =>
+                user.missing_fname.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                user.missing_lname.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            setMissingRequire(filteredData);
+        }
+    };
 
     const currentTableData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -68,17 +82,23 @@ const AdministratorPage = () => {
         return missingRequire.slice(firstPageIndex, lastPageIndex);
     }, [currentPage, missingRequire]);
 
+    const personStatus = (missingStatus) => {
+        let classStatus, textStatus;
 
-    const handleStatus = (event) => {
-        setValue(event.target.value);
-    };
-
-    const options = [
-        { value: 'found', label: 'พบแล้ว' },
-        { value: 'not-found', label: 'สูญหาย' },
-        { value: 'verifying', label: 'กำลังตรวจสอบ' },
-        { value: 'dead', label: 'ตาย' },
-    ]
+        if (user.missing_status === 'พบแล้ว') {
+            classStatus = 'admin-person-found';
+            textStatus = 'พบแล้ว';
+        } else if (user.missing_status === 'กำลังตรวจสอบ') {
+            classStatus = 'admin-person-verifying';
+            textStatus = 'กำลังตรวจสอบ';
+        } else if (user.missing_status === 'ตาย') {
+            classStatus = 'admin-person-dead';
+            textStatus = 'ตาย';
+        } else {
+            classStatus = 'admin-person-not-found';
+            textStatus = 'สูญหาย';
+        }
+    }
 
 
     return (
@@ -91,37 +111,14 @@ const AdministratorPage = () => {
                         <div className="custom-input-container">
                             <input
                                 type="text"
-                                // value=
-                                // onChange={inputValue('surname')}
+                                value={searchTerm}
+                                onChange={(e) => setSearchTerm(e.target.value)}
                                 className="custom-input"
                                 placeholder=" "
                             />
                             <label className="custom-label">ค้นหาด้วยชื่อนามสกุล *</label>
                         </div>
-                        <div className="custom-input-container">
-                            <input
-                                type="date"
-                                // onChange={inputValue('date')}
-                                // value={info.date}
-                                className='dropdown-toggle date'
-                            />
-                            <label className="custom-dropdown-label">วัน *</label>
-                        </div>
-                        <div className="custom-input-container">
-                            <select
-                                className="dropdown-toggle gender-input"
-                                onChange={handleStatus}
-                                value={value}
-                            >
-                                {options.map((option) => (
-                                    <option key={option.value} value={option.value}>
-                                        {option.label}
-                                    </option>
-                                ))}
-                            </select>
-                            <label className="custom-dropdown-label">สถานะ *</label>
-                        </div>
-                        <button className='admin-search-button'>ค้นหา</button>
+                        <button className='admin-search-button' onClick={handleSearch}>ค้นหา</button>
                     </div>
                 </section>
                 <section className='admin-frame-table'>
@@ -140,24 +137,37 @@ const AdministratorPage = () => {
                             </tr>
                         </thead>
                         <tbody className='admin-table-tbody'>
-                            {currentTableData.map((user, key) => (
-                                <tr className='table-row-body' key={key}>
-                                    <td className='table-field'>{user.missing_fname}</td>
-                                    <td className='table-field'>{user.missing_lname}</td>
-                                    <td className='table-field'>{user.missing_gender}</td>
-                                    <td className='table-field'>{user.missing_province}</td>
-                                    <td className='table-field'>{user.missing_date}</td>
-                                    <td className='table-field'>{user.missing_cause}</td>
-                                    <td className='table-field'>
+                            {missingRequire && missingRequire.length > 0 ? (
+                                currentTableData.map((user, key) => (
+                                    <tr className='table-row-body' key={key}>
+                                        <td className='table-field'>{user.missing_fname}</td>
+                                        <td className='table-field'>{user.missing_lname}</td>
+                                        <td className='table-field'>{user.missing_gender}</td>
+                                        <td className='table-field'>{user.missing_province}</td>
+                                        <td className='table-field'>{user.missing_date}</td>
+                                        <td className='table-field'>{user.missing_cause}</td>
+                                        <td className='table-field'>
                                         <div className={`admin-person-status
-                                            ${user.missing_status === 'พบแล้ว' ? 'admin-person-found' : user.missing_status === 'กำลังตรวจสอบ' ? 'admin-person-verifying' : user.missing_status === 'ตาย' ? 'admin-person-dead' : 'admin-person-not-found'}`}>
-                                            {user.missing_status === 'พบแล้ว' ? 'พบแล้ว' : user.missing_status === 'กำลังตรวจสอบ' ? 'กำลังตรวจสอบ' : user.missing_status === 'ตาย' ? 'ตาย' : 'สูญหาย'}
+                                            ${user.missing_status === 'พบแล้ว' ? 'admin-person-found' :
+                                                user.missing_status === 'กำลังตรวจสอบ' ? 'admin-person-verifying' :
+                                                user.missing_status === 'เสียชีวิต' ? 'admin-person-dead' :
+                                                user.missing_status === 'สูญหาย' ? 'admin-person-not-found' : ''}`}>
+                                            {user.missing_status === 'พบแล้ว' ? 'พบแล้ว' :
+                                                user.missing_status === 'กำลังตรวจสอบ' ? 'กำลังตรวจสอบ' :
+                                                user.missing_status === 'เสียชีวิต' ? 'เสียชีวิต' :
+                                                user.missing_status === 'สูญหาย' ? 'สูญหาย' : ''}
                                         </div>
-                                    </td>
-                                    <td className=''><Link to={`/administrator/person-info/${user.missing_slug}`} className='admin-verify-button'>ตรวจสอบ</Link></td>
-                                    <td className=''><button className='admin-bt-delete' onClick={() => confirmDelete(user.missing_slug)}><LiaTrashAlt /></button></td>
+
+                                        </td>
+                                        <td className=''><Link to={`/administrator/person-info/${user.missing_slug}`} className='admin-verify-button'>ตรวจสอบ</Link></td>
+                                        <td className=''><button className='admin-bt-delete' onClick={() => confirmDelete(user.missing_slug)}><LiaTrashAlt /></button></td>
+                                    </tr>
+                                ))
+                            ) : (
+                                <tr>
+                                    <td className='table-field'>No data</td>
                                 </tr>
-                            ))}
+                            )}
 
                         </tbody>
                     </table>
@@ -166,7 +176,7 @@ const AdministratorPage = () => {
                 <Pagination
                     className="pagination-bar"
                     currentPage={currentPage}
-                    totalCount={missingRequire.length}
+                    totalCount={currentTableData.length}
                     pageSize={PageSize}
                     onPageChange={page => setCurrentPage(page)}
                 />

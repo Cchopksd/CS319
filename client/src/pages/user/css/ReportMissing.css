@@ -245,27 +245,8 @@
     background-color: #fff;
 }
 
-/* @media screen and (min-width: 950px) and (max-width : 1250px) {
-    .missing-report-container{
-        display: flex;
-        flex-direction: column;
-        width: 400px;
-        margin: 100px auto;
-        align-items: center;
-    }
-    .custom-input {
-        padding-left: 15px;
-        width: 100px;
-        height: 40px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        display: flex;
-        gap: 5em;
-    }
-} */
 .report-card {
-    margin: 30px 0 0 0;
+    margin: 30px auto;
     display: flex;
     flex-direction: column;
     width: 330px;
@@ -346,23 +327,48 @@
     margin: 0 10px 0 0;
 }
 
+@media screen and (min-width: 950px) and (max-width : 1250px) {
+/* 
+    .missing-report-page {
+        display: flex;
+        flex-direction: row;
+        width: auto;
+        height: auto;
+    } */
+
+    .missing-report-container{
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+    }
+}
+
 @media screen and (min-width: 0px) and (max-width : 950px) {
     .missing-report-container {
         display: flex;
         flex-direction: column;
-        width: 300px;
+        width: 370px;
         margin: auto;
+
     }
+    
 
     .custom-input {
         padding-left: 15px;
-        width: 300px;
+        width: 350px;
         height: 40px;
         border: 2px solid #ccc;
         border-radius: 5px;
         outline: none;
         display: flex;
         gap: 5em;
+    }
+    .custom-input-container {
+        width: 100%;
+    }
+
+    .date{
+        width: 350px;
     }
 
     .inputData-line-1 {
@@ -376,7 +382,7 @@
         justify-content: center;
         margin: 40px auto;
         padding: 5px;
-        width: 320px;
+        width: 370px;
         border-radius: 8px;
         color: #fff;
         background: var(--primary-primary, #0C5DFF);
@@ -413,7 +419,7 @@
         flex-direction: column;
         align-items: center;
         background-color: #D9D9D9;
-        width: 300px;
+        margin: 10px auto 100px ;
     }
 
     .lasted-container {
@@ -448,14 +454,8 @@
 
 
     .custom-textarea {
-        padding: 15px;
-        width: 290px;
+        width: 335px;
         height: 100px;
-        border: 2px solid #ccc;
-        border-radius: 5px;
-        outline: none;
-        display: flex;
-        resize: none !important;
     }
 
 }
