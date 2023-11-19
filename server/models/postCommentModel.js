@@ -23,10 +23,10 @@ const postCommentSchema = mongoose.Schema({
         type : String,
         default : ""
     },
-    clue_photo2 : {
+    clue_photo3 : {
         type : String,
         default : ""
-    },
+    }
 }, {timestamps: true})
 
 module.exports = mongoose.model("PostComment",postCommentSchema)

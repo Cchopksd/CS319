@@ -118,3 +118,12 @@ exports.getUserId = async (req,res) => {
         res.status(400).json({error: err})
     })
 }
+
+exports.getUserImage = async (req,res) => {
+    const { loginUser } = req.body
+    await Member.findOne({_id: loginUser}).then((userInfo) => {
+        res.status(200).json(userInfo.profileImage)
+    }).catch((err) => {
+        res.status(400).json({error: err})
+    })
+}

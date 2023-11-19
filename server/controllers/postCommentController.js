@@ -2,13 +2,13 @@ const PostComment = require('../models/postCommentModel')
 
 exports.postcomment = async(req,res) => {
 
-    const {missing_id,usercomment_id,comment,image1,image2,image3} = req.body
+    const {missingid,loginUser,comment,image1,image2,image3} = req.body
 
 
     if (image1 === "" ) {
         await PostComment.create({
-            missing_id : missing_id,
-            usercomment_id : usercomment_id,
+            missing_id : missingid,
+            usercomment_id : loginUser,
             clue_comment : comment
         }).then(() => {
             res.status(200).json({message : "โพสต์สำเร็จ"})
@@ -17,8 +17,8 @@ exports.postcomment = async(req,res) => {
         })
     } else if (image2 === "") {
         await PostComment.create({
-            missing_id : missing_id,
-            usercomment_id : usercomment_id,
+            missing_id : missingid,
+            usercomment_id : loginUser,
             clue_comment : comment,
             clue_photo1 : image1,
         }).then(() => {
@@ -28,8 +28,8 @@ exports.postcomment = async(req,res) => {
         })
     } else if (image3 === "") {
         await PostComment.create({
-            missing_id : missing_id,
-            usercomment_id : usercomment_id,
+            missing_id : missingid,
+            usercomment_id : loginUser,
             clue_comment : comment,
             clue_photo1 : image1,
             clue_photo2 : image2
@@ -40,9 +40,9 @@ exports.postcomment = async(req,res) => {
         })
     } else {
         await PostComment.create({
-            missing_id : missing_id,
-            usercomment_id : usercomment_id,
-            clue_comment : clue_comment,
+            missing_id : missingid,
+            usercomment_id : loginUser,
+            clue_comment : comment,
             clue_photo1 : image1,
             clue_photo2 : image2,
             clue_photo3 : image3
@@ -55,8 +55,8 @@ exports.postcomment = async(req,res) => {
 }
 
 exports.getcomment = async(req,res) => {
-    const {missing_id} = req.body
-    await PostComment.find({missing_id : missing_id}).then((comments) => {
+    const {missingid} = req.body
+    await PostComment.find({missing_id : missingid}).populate('usercomment_id').sort({createdAt:-1}).then((comments) => {
         res.status(200).json(comments)
     }).catch((err) => {
         return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
