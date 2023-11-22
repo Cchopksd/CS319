@@ -16,6 +16,8 @@ const MissingClue = ({missingid}) => {
     //redirect หน้า
     const navigate = useNavigate()
 
+    const [loginImage, setLoginImage] = useState(false)
+
     const [isLogin, setIsLogin] = useState(getUser())
 
     const [comment,setComment] = useState("")
@@ -129,31 +131,35 @@ const MissingClue = ({missingid}) => {
         // ดึงข้อมูล id ของผู้ใช้งาน
         try{
             const id = await getUserId()
+            setLoginImage(true)
             setLoginUser(id.data)
         }catch (error) {
             console.error(error);
         }
     }
     const loadImg = async(e) => {
-        await axios.post(`${import.meta.env.VITE_APP_API}/get-userImage`,{loginUser}).then(async(res) => {
-            setUserImage(res.data)
-        }) 
+        if(isLogin) {
+            await axios.post(`${import.meta.env.VITE_APP_API}/get-userImage`,{loginUser}).then(async(res) => {
+                setUserImage(res.data)
+            }) 
+        }
         await axios.post(`${import.meta.env.VITE_APP_API}/allcomment`,{missingid}).then(async(res) => {
             setAllComment(res.data)
         })   
     }
 
     useEffect(() => {
-        if(!isLogin) {
-            navigate('/login')
-        }
+        // if(!isLogin) {
+        //     navigate('/login')
+        // }
         loadData()
     }, [])
 
     useEffect(() => {
-        loadImg()
-    }, [loginUser])
-
+        if (loginImage) {
+            loadImg()
+        }
+    }, [loginImage])
     
     const handleDataFromChild = (data) => {
         setImages(data)
@@ -176,64 +182,26 @@ const MissingClue = ({missingid}) => {
         return formatter.format(date);
     }
 
-    const dummyData = [
-        {
-            fname : 'กนกพล',
-            lname : 'เทียมเมือง',
-            description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus eque ac faucibus porta, nulla augue rutrum orci, et imperdiet erat ex et massa Vestibulum mattis, purus eget blandit tempus, mauris turpis dignissim lorem, ac fermentum est ligula porta est. Vestibulum congue, nisi ut consequat eleifend, urna arcu varius ligula.',
-            date : '21 พฤศจิกายน 2566',
-            profilePhoto : 'https://dudeproducts.com/cdn/shop/articles/gigachad_1068x.jpg?v=1667928905',
-            cluePhoto1 : 'https://www.thai2night.com/upload/shop/photo_cover/master/20180323235749M5hkkI5P9P.jpg',
-            cluePhoto2 : "",
-            cluePhoto3 : ""
-        },
-        {
-            fname : 'กนกพล',
-            lname : 'เทียมเมือง',
-            description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus eque ac faucibus porta, nulla augue rutrum orci, et imperdiet erat ex et massa Vestibulum mattis, purus eget blandit tempus, mauris turpis dignissim lorem, ac fermentum est ligula porta est. Vestibulum congue, nisi ut consequat eleifend, urna arcu varius ligula.',
-            date : '21 พฤศจิกายน 2566',
-            profilePhoto : 'https://dudeproducts.com/cdn/shop/articles/gigachad_1068x.jpg?v=1667928905',
-            cluePhoto1 : '',
-            cluePhoto2 : "",
-            cluePhoto3 : ""
-        },
-        {
-            fname : 'กนกพล',
-            lname : 'เทียมเมือง',
-            description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus eque ac faucibus porta, nulla augue rutrum orci, et imperdiet erat ex et massa Vestibulum mattis, purus eget blandit tempus, mauris turpis dignissim lorem, ac fermentum est ligula porta est. Vestibulum congue, nisi ut consequat eleifend, urna arcu varius ligula.',
-            date : '21 พฤศจิกายน 2566',
-            profilePhoto : 'https://dudeproducts.com/cdn/shop/articles/gigachad_1068x.jpg?v=1667928905',
-            cluePhoto1 : 'https://www.thai2night.com/upload/shop/photo_cover/master/20180323235749M5hkkI5P9P.jpg',
-            cluePhoto2 : "https://www.thai2night.com/upload/shop/photo_cover/master/20180323235749M5hkkI5P9P.jpg",
-            cluePhoto3 : "https://www.thai2night.com/upload/shop/photo_cover/master/20180323235749M5hkkI5P9P.jpg"
-        },
-        {
-            fname : 'กนกพล',
-            lname : 'เทียมเมือง',
-            description : 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus eque ac faucibus porta, nulla augue rutrum orci, et imperdiet erat ex et massa Vestibulum mattis, purus eget blandit tempus, mauris turpis dignissim lorem, ac fermentum est ligula porta est. Vestibulum congue, nisi ut consequat eleifend, urna arcu varius ligula.',
-            date : '21 พฤศจิกายน 2566',
-            profilePhoto : 'https://dudeproducts.com/cdn/shop/articles/gigachad_1068x.jpg?v=1667928905',
-            cluePhoto1 : 'https://www.thai2night.com/upload/shop/photo_cover/master/20180323235749M5hkkI5P9P.jpg',
-            cluePhoto2 : "https://www.thai2night.com/upload/shop/photo_cover/master/20180323235749M5hkkI5P9P.jpg",
-            cluePhoto3 : ""
-        },
-    ]
-
     return (
         <div className='missClue-container'>
             <hr/>
             <div className='missClue-writeComment-box'>
-                <img className='missClue-login-photo'src={userImage}/>
-                <div className='missClue-input-box'>
-                    <textarea className='missClue-input' placeholder='คุณมีเบาะแสหรอ? มาแบ่งปันกันเถอะ...' value={comment} onChange={(e)=>{setComment(e.target.value)}}/>
-                    <div className='missClue-input-footer-box'>
-                        {/* <GrCamera size={20}/> */}
-                        <div style={{width: '100%'}}>
-                            <ImageUploaderClue onDataSend={handleDataFromChild}/>
+                {isLogin && <img className='missClue-login-photo'src={userImage}/>}
+                {isLogin ? (
+                    <div className='missClue-input-box'>
+                        <textarea className='missClue-input' placeholder='คุณมีเบาะแสหรอ? มาแบ่งปันกันเถอะ...' value={comment} onChange={(e)=>{setComment(e.target.value)}}/>
+                        <div className='missClue-input-footer-box'>
+                            <div style={{width: '100%'}}>
+                                <ImageUploaderClue onDataSend={handleDataFromChild}/>
+                            </div>
+                            <IoSend size={20} style={{margin: '0 0 0 30px'}} onClick={sendComment}/>
                         </div>
-                        <IoSend size={20} style={{margin: '0 0 0 30px'}} onClick={sendComment}/>
                     </div>
-                </div>
+                ) : (
+                    <div style={{ display: 'flex', justifyContent: 'center', width: '100%'}}>
+                        กรุณาเข้าสู่ระบบเพื่อเขียนเบาะแส
+                    </div>
+                )} 
             </div>
             { allComment.map((item) => (
                 <div className='missClue-comment-box' key={item.usercomment_id.fname}>
