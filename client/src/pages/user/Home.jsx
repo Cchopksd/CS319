@@ -14,87 +14,6 @@ const Home = () => {
     // array ของ post
     const [postArray, setPostArray] = useState([])
 
-    const dummyData = [
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        },
-        {
-            fname : "ยุรนันท์",
-            lname : "เจิดรุจิกุล",
-            status : 'สูญหาย',
-            position : 'บ้านอาร์ท',
-            cause : 'อุทกภัย',
-            postDate : '21 มกราคม 2566',
-            reportDate : '18 มกราคม 2566',
-            country : 'กรุงเทพมหานคร',
-            totalClue : 13,
-            gender : "ชาย",
-            photo : "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y="
-        }
-    ]
-
     // format date thai
     const formatDate = (dateString) => {
         const options = {
@@ -132,6 +51,12 @@ const Home = () => {
     //ไปหน้าาคนหาย
     const handleGoFind = () => {
         navigate(`/find-missing`)
+    }
+
+    const getCount = async (id) => {
+        const count = await axios.post(`${import.meta.env.VITE_APP_API}/get-count-comment`,{id})
+        console.log(count.data)
+        return count.data
     }
 
     return (
@@ -203,7 +128,8 @@ const Home = () => {
                                     </div>
                                     <div className="home-card-clue">
                                         <MdOutlineModeComment size={20} className="home-card-clue-icon"/>
-                                        20
+                                        {/* {countComment == axios.post(`${import.meta.env.VITE_APP_API}/get-count-comment`, {item.missing_slug})} */}
+                                        <label>{getCount(item._id)}</label>
                                     </div>
                                 </div>
                             </div>

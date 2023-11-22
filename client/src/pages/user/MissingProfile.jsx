@@ -19,8 +19,6 @@ const MissingProfile = () => {
     // redirect หน้า
     const navigate = useNavigate()
 
-    const [isLogin, setIsLogin] = useState(getUser())
-
     // params
     const params = useParams()
 

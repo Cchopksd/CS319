@@ -1,4 +1,5 @@
 const MissingRequest = require('../models/missingRequestModel')
+const PostComment =  require('../models/postCommentModel')
 const { v4: uuidv4 } = require('uuid');
 
 
@@ -151,4 +152,17 @@ exports.getSinglePost = async (req,res) => {
     }).catch((err) => {
         return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
     })
+}
+
+exports.countComment = async (req,res) => {
+    const { id } = req.body
+
+    await PostComment.find({missing_id : id}).then((post) => {
+        // จำนวนของ comment ทั้งหมด
+        const commentCount = post.length
+        res.status(200).json(commentCount)
+    }).catch((err) => {
+        return res.status(400).json({error : 'เกิดข้อผิดพลาด'})
+    })
+
 }
