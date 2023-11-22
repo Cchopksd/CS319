@@ -8,8 +8,15 @@ import ImageUploaderClue from '../../components/ImageUploaderClue'
 import { getUserId } from '../../services/authorize';
 import axios from 'axios';
 import Swal from 'sweetalert2'
+import { getUser } from "../../services/authorize";
+import { useNavigate } from 'react-router-dom';
 
 const MissingClue = ({missingid}) => {
+
+    //redirect หน้า
+    const navigate = useNavigate()
+
+    const [isLogin, setIsLogin] = useState(getUser())
 
     const [comment,setComment] = useState("")
 
@@ -137,8 +144,10 @@ const MissingClue = ({missingid}) => {
     }
 
     useEffect(() => {
+        if(!isLogin) {
+            navigate('/login')
+        }
         loadData()
-
     }, [])
 
     useEffect(() => {
@@ -238,19 +247,11 @@ const MissingClue = ({missingid}) => {
                     </div>
                     <div className='missClue-comment-des-box'>
                         <p>{item.clue_comment}</p>
-                        {item.clue_photo1 != "" && <img src={item.clue_photo1}/>}
-                        {item.clue_photo2 != "" && <img src={item.clue_photo2}/>}
-                        {item.clue_photo3 != "" && <img src={item.clue_photo3}/>}
-                        {/* {item.cluePhoto1 != "" ? (
-                            <div className='missClue-comment-photo-box'>
-                                {item.cluePhoto1 != "" && <img src={item.clue_photo1}/>}
-                                {item.cluePhoto2 != "" && <img src={item.clue_photo2}/>}
-                                {item.cluePhoto3 != "" && <img src={item.clue_photo3}/>}
-                            </div>
-                        ):(
-                            <>      
-                            </>
-                        )} */}
+                        <div className='missClue-comment-photo-box'>
+                            {item.clue_photo1 != "" && <img src={item.clue_photo1}/>}
+                            {item.clue_photo2 != "" && <img src={item.clue_photo2}/>}
+                            {item.clue_photo3 != "" && <img src={item.clue_photo3}/>}
+                        </div>
                     </div>
                 </div>
             ))}

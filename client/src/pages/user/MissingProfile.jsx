@@ -12,11 +12,14 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { IoIosArrowBack } from 'react-icons/io'
 import axios from 'axios'
 import Swal from "sweetalert2";
+import { getUser } from "../../services/authorize";
 
 
 const MissingProfile = () => {
     // redirect หน้า
     const navigate = useNavigate()
+
+    const [isLogin, setIsLogin] = useState(getUser())
 
     // params
     const params = useParams()
