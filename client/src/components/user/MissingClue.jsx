@@ -10,6 +10,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2'
 import { getUser } from "../../services/authorize";
 import { useNavigate } from 'react-router-dom';
+import Loading from '../Loading';
 
 const MissingClue = ({missingid}) => {
 
@@ -42,6 +43,8 @@ const MissingClue = ({missingid}) => {
     const [loading, setLoading] = useState(false)
 
     const [allComment, setAllComment] = useState([])
+
+    const [resetChild, setResetChild] = useState(false)
     
     const sendComment = async (e) => {
         e.preventDefault();
@@ -93,7 +96,14 @@ const MissingClue = ({missingid}) => {
                         res.data.message,
                         'success'
                     )
-                    navigate(`/`)
+                    loadImg()
+                    setImage1("")
+                    setImage2("")
+                    setImage3("")
+                    setImages([])
+                    setUploadImg(false)
+                    setComment("")
+                    window.location.reload()
                 }).catch(async (err) => {
                     setLoading(false)
                     await Swal.fire(
@@ -115,7 +125,14 @@ const MissingClue = ({missingid}) => {
                         res.data.message,
                         'success'
                     )
-                    navigate(`/`)
+                    loadImg()
+                    setImage1("")
+                    setImage2("")
+                    setImage3("")
+                    setImages([])
+                    setUploadImg(false)
+                    setComment("")
+                    window.location.reload()
                 }).catch(async (err) => {
                     setLoading(false)
                     await Swal.fire(
@@ -149,9 +166,6 @@ const MissingClue = ({missingid}) => {
     }
 
     useEffect(() => {
-        // if(!isLogin) {
-        //     navigate('/login')
-        // }
         loadData()
     }, [])
 
@@ -184,6 +198,7 @@ const MissingClue = ({missingid}) => {
 
     return (
         <div className='missClue-container'>
+            {loading && <Loading/>}
             <hr/>
             <div className='missClue-writeComment-box'>
                 {isLogin && <img className='missClue-login-photo'src={userImage}/>}

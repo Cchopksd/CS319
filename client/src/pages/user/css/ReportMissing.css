@@ -4,15 +4,18 @@
     width: auto;
     height: auto;
 }
+.missing-report-back-box {
+    display: flex;
+    align-items: end;
+    margin: 0 0 0 100px;
+    height: 100px;
+}
 
 .missing-report-container {
     display: flex;
     gap: 8rem;
     width: 1200px;
-    margin: 100px auto;
-}
-
-.missing-report-container-center {
+    margin: 30px auto;
 }
 
 .inputData {
@@ -334,6 +337,9 @@
         flex-direction: row;
         width: auto;
         height: auto;
+    } */
+    /* .missing-report-container-center {
+        width: 1000px;
     } */
 
     .missing-report-container{

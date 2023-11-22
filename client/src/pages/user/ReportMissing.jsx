@@ -10,6 +10,83 @@ import { useNavigate, Link } from 'react-router-dom';
 import ImageUploaderReport from '../../components/ImageUploaderReport';
 import Loading from '../../components/Loading';
 import { MdOutlineModeComment } from 'react-icons/md'
+import { IoIosArrowBack } from 'react-icons/io'
+
+const MissingCard = ({item}) => {
+
+    const [commentCount, setCommentCount] = useState(null);
+
+    // format date thai
+    const formatDate = (dateString) => {
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            timeZone: 'UTC'
+        };
+    
+        const date = new Date(dateString);
+        const formatter = new Intl.DateTimeFormat('th-TH', options);
+        return formatter.format(date);
+    }
+
+    useEffect(() => {
+        const fetchCommentCount = async () => {
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_APP_API}/get-count-comment`, { id: item._id });
+            setCommentCount(response.data);
+        } catch (error) {
+            console.error('Error fetching comment count:', error);
+        }
+        };
+
+        fetchCommentCount();
+    }, [item._id]);
+    
+    return (
+        <Link to={`/missing-profile/${item.missing_slug}`} style={{textDecoration: 'none', color: 'inherit'}}> 
+            <div className="report-card" key={item._id}>
+                <img src={item.missing_photo1 == "" ? "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y=" : item.missing_photo1} alt=""/>
+                <div className="report-info-box">
+                    <div className="report-card-row-1">
+                        <label>{formatDate(item.updatedAt)}</label>
+                        <div className="report-card-status">
+                            {item.missing_status}
+                        </div>
+                    </div>
+                    <div className="report-card-row-2">
+                        <label>{item.missing_fname}&ensp;</label>
+                        <label>{item.missing_lname}&ensp;</label>
+                        <label>{`(${item.missing_gender})`}</label>
+                    </div>
+                    <div className="report-card-row-3">
+                        <div className="report-card-place">
+                            <label>สูญหายที่ :</label>
+                            <label> {item.missing_position.length > 15 ? item.missing_position.slice(0, 15) + "..." : item.missing_position}</label>
+                        </div>
+                        <div className="report-card-cause">
+                            <label>สาเหตุการหาย :</label>
+                            <label> {item.missing_cause.length > 15 ? item.missing_cause.slice(0, 15) + "..." : item.missing_cause}</label>
+                        </div>
+                        <div className="report-card-date">
+                            <label>วันที่รายงานการสูญหาย :</label>
+                            <label> {formatDate(item.createdAt)}</label>
+                        </div>
+                    </div>
+                    <div className="report-card-row-4">
+                        <div className="report-card-province">
+                            {item.missing_province}
+                        </div>
+                        <div className="report-card-clue">
+                            <MdOutlineModeComment size={20} className="report-card-clue-icon"/>
+                            {commentCount !== null ? commentCount : 'Loading...'}
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </Link>
+    )
+}
 
 const ReportMissing = () => {
 
@@ -182,24 +259,18 @@ const ReportMissing = () => {
         setImages(data)
     }
 
-    // format date thai
-    const formatDate = (dateString) => {
-        const options = {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric',
-            timeZone: 'UTC'
-        };
-    
-        const date = new Date(dateString);
-        const formatter = new Intl.DateTimeFormat('th-TH', options);
-        return formatter.format(date);
+    // กลับย้อนหน้า
+    const handleBack = () => {
+        navigate(-1)
     }
 
     return (
         <div className='missing-report-page'>
             {loading && <Loading/>}
             <Navbar />
+            <div className="missing-report-back-box" onClick={handleBack}>
+                <IoIosArrowBack size={60}/>
+            </div>
             <main className='missing-report-container'>
                 <form className='missing-report-container-center' onSubmit={sendReport}>
                     <h1>รายงานข้อมูลผู้สูญหาย</h1>
@@ -316,47 +387,7 @@ const ReportMissing = () => {
                 <aside className='lasted-side'>
                     <h3>ผู้สูญหายล่าสุด</h3>
                     {postArray.map((item) => (
-                        <Link to={`/missing-profile/${item.missing_slug}`} style={{textDecoration: 'none', color: 'inherit'}}> 
-                            <div className="report-card" key={item._id}>
-                                <img src={item.missing_photo1 == "" ? "https://media.istockphoto.com/id/1288129985/vector/missing-image-of-a-person-placeholder.jpg?s=612x612&w=0&k=20&c=9kE777krx5mrFHsxx02v60ideRWvIgI1RWzR1X4MG2Y=" : item.missing_photo1} alt=""/>
-                                <div className="report-info-box">
-                                    <div className="report-card-row-1">
-                                        <label>{formatDate(item.updatedAt)}</label>
-                                        <div className="report-card-status">
-                                            {item.missing_status}
-                                        </div>
-                                    </div>
-                                    <div className="report-card-row-2">
-                                        <label>{item.missing_fname}&ensp;</label>
-                                        <label>{item.missing_lname}&ensp;</label>
-                                        <label>{`(${item.missing_gender})`}</label>
-                                    </div>
-                                    <div className="report-card-row-3">
-                                        <div className="report-card-place">
-                                            <label>สูญหายที่ :</label>
-                                            <label> {item.missing_position.length > 15 ? item.missing_position.slice(0, 15) + "..." : item.missing_position}</label>
-                                        </div>
-                                        <div className="report-card-cause">
-                                            <label>สาเหตุการหาย :</label>
-                                            <label> {item.missing_cause.length > 15 ? item.missing_cause.slice(0, 15) + "..." : item.missing_cause}</label>
-                                        </div>
-                                        <div className="report-card-date">
-                                            <label>วันที่รายงานการสูญหาย :</label>
-                                            <label> {formatDate(item.createdAt)}</label>
-                                        </div>
-                                    </div>
-                                    <div className="report-card-row-4">
-                                        <div className="report-card-province">
-                                            {item.missing_province}
-                                        </div>
-                                        <div className="report-card-clue">
-                                            <MdOutlineModeComment size={20} className="report-card-clue-icon"/>
-                                            20
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        </Link>
+                            <MissingCard item={item}/>
                         ))}
                 </aside>
             </main>

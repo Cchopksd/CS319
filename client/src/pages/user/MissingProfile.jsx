@@ -161,6 +161,7 @@ const MissingProfile = () => {
                         </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };
