@@ -18,17 +18,16 @@ export const Login = () => {
         e.preventDefault();
         console.log(email);
 
-
         await axios.post(`${import.meta.env.VITE_APP_API}/signin`,{email,pass})
         .then(async (res) => {
             await Swal.fire('แจ้งเตือน','เข้าสู่ระบบสำเร็จ','success')
-            authenticate(res,()=>navigate('/'))
-            // if(res.data.role === "admin"){
-
-            // }
-            // else{
-            //     authenticate(res,()=>navigate('/home'))
-            // }
+            // authenticate(res,()=>navigate('/'))
+            if(res.data.role === "admin"){
+                authenticate(res,()=>navigate('/administrator'))
+            }
+            else{
+                authenticate(res,()=>navigate('/'))
+            }
         }).catch((err) => {
             Swal.fire('แจ้งเตือน', err.response.data.error, 'error')
         })
