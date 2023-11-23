@@ -47,6 +47,28 @@ exports.updateStatus = async (req, res) => {
     })
 }
 
+exports.searchAdmin = async (req, res) => {
+    const { query } = req.params;
+    // console.log('Query:', query);
+    try {
+        if (!query) {
+            const newResult = await MissingRequest.find();
+            console.log(newResult)
+            return res.status(200).json(newResult);
+        } else {
+            const result = await MissingRequest.find({
+                $or: [
+                    { missing_fname: { $regex: query, $options: 'i' } },
+                    { missing_lname: { $regex: query, $options: 'i' } },
+                ],
+            });
+            return res.status(200).json(result)
+        }
+    } catch (err) {
+        return res.status(500).json({ message: err.message })
+    }
+}
+
 // exports.findUserByCriteria = async (req, res) => {
 //     const { setName, setStatus } = req.body;
 
