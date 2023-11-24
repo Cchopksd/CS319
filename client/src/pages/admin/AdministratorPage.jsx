@@ -7,7 +7,6 @@ import Pagination from '../../components/Pagination';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { Link } from 'react-router-dom';
-import AnimatedPage from '../../AnimatedPage';
 
 
 const AdministratorPage = () => {
@@ -103,7 +102,6 @@ const AdministratorPage = () => {
 
 
     return (
-        <AnimatedPage>
             <div className='admin-screen'>
                 <Navbar />
                 <main className='admin-dashboard'>
@@ -185,7 +183,6 @@ const AdministratorPage = () => {
                 </main>
                 <Footer />
             </div>
-        </AnimatedPage>
     );
 }
 
