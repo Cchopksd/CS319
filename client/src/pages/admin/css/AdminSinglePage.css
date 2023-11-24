@@ -2,6 +2,7 @@
     display: flex;
     justify-content: center;
     width: 1200px;
+    margin: auto 200px;
 }
 
 .single-data-container {
