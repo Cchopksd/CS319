@@ -7,6 +7,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { authenticate } from "../../services/authorize";
 import Loading from '../../components/Loading.jsx'
+import AnimatedPage from "../../AnimatedPage.jsx";
 
 const Register = () => {
     // redirect หน้า

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { authenticate } from "../../services/authorize";
+import AnimatedPage from "../../AnimatedPage";
 
 
 export const Login = () => {
@@ -35,6 +36,7 @@ export const Login = () => {
     }
     return (
         <div className="bg-signin">
+            {/* <AnimatedPage style={{display: 'flex'}}> */}
             <div className="auth-form-page">
                 <div className="singin-container">
                     <img className="img-back" src={logo2} onClick={() => { navigate(-1) }} />
@@ -67,6 +69,7 @@ export const Login = () => {
                     </form>
                 </div>
             </div>
+            {/* </AnimatedPage> */}
         </div>
     );
 }

@@ -13,6 +13,7 @@ import { IoIosArrowBack } from 'react-icons/io'
 import axios from 'axios'
 import Swal from "sweetalert2";
 import { getUser } from "../../services/authorize";
+import AnimatedPage from "../../AnimatedPage";
 
 
 const MissingProfile = () => {
@@ -110,7 +111,7 @@ const MissingProfile = () => {
     },[])
 
     return (
-        <div>
+        <AnimatedPage>
             <Navbar/>
             <div className="missing-profile-back-box" onClick={handleBack}>
                 <IoIosArrowBack size={60}/>
@@ -162,7 +163,7 @@ const MissingProfile = () => {
                 </div>
             </div>
             <Footer/>
-        </div>
+        </AnimatedPage>
     );
 };
 

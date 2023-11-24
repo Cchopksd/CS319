@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import './css/AdminSinglePage.css'
+import AnimatedPage from '../../AnimatedPage';
 
 const AdminSinglePage = () => {
 
@@ -76,69 +77,71 @@ const AdminSinglePage = () => {
     }
 
     return (
-        <div className='single-data-page'>
-            <Navbar />
-            <div className='single-data-layout'>
-                <div className="find-back-box" onClick={handleBack}>
-                    <IoIosArrowBack size={60} />
-                </div>
-                <div className='single-data-container'>
-                    <div>
-                        <section className='single-data-container-header'>
-                            <div className='single-data-group-img'>
-                                <img className={`single-data-img ${!missingData || !missingData.missing_photo1 ? 'hidden-element' : ''}`} src={missingData?.missing_photo1} alt="" />
-                                <img className={`single-data-img ${!missingData || !missingData.missing_photo2 ? 'hidden-element' : ''}`} src={missingData.missing_photo2} alt="" />
-                                <img className={`single-data-img ${!missingData || !missingData.missing_photo3 ? 'hidden-element' : ''}`} src={missingData.missing_photo3} alt="" />
-                            </div>
-                            <div className='single-data-status'>
-                                <strong className='text-status'>สถานะ</strong>
-                                <div className='single-data-radio'>
-                                    <label className='cursor-status'><input type="radio" value="กำลังตรวจสอบ" className="cursor-status" checked={missingStatus === 'กำลังตรวจสอบ'} onChange={handleRadioChange} /> กำลังตรวจสอบ</label>
-                                    <label className='cursor-status'><input type="radio" value="พบแล้ว" className="cursor-status" checked={missingStatus === 'พบแล้ว'} onChange={handleRadioChange} /> พบแล้ว</label>
-                                    <label className='cursor-status'><input type="radio" value="สูญหาย" className="cursor-status" checked={missingStatus === 'สูญหาย'} onChange={handleRadioChange} /> สูญหาย</label>
-                                    <label className='cursor-status'><input type="radio" value="เสียชีวิต" className="cursor-status" checked={missingStatus === 'เสียชีวิต'} onChange={handleRadioChange} /> เสียชีวิต</label>
+        <AnimatedPage>
+            <div className='single-data-page'>
+                <Navbar />
+                <div className='single-data-layout'>
+                    <div className="find-back-box" onClick={handleBack}>
+                        <IoIosArrowBack size={60} />
+                    </div>
+                    <div className='single-data-container'>
+                        <div>
+                            <section className='single-data-container-header'>
+                                <div className='single-data-group-img'>
+                                    <img className={`single-data-img ${!missingData || !missingData.missing_photo1 ? 'hidden-element' : ''}`} src={missingData?.missing_photo1} alt="" />
+                                    <img className={`single-data-img ${!missingData || !missingData.missing_photo2 ? 'hidden-element' : ''}`} src={missingData.missing_photo2} alt="" />
+                                    <img className={`single-data-img ${!missingData || !missingData.missing_photo3 ? 'hidden-element' : ''}`} src={missingData.missing_photo3} alt="" />
                                 </div>
-                            </div>
-                        </section>
-                        <section className='single-data-group'>
-                            <div className='single-data-col'>
-                                <strong htmlFor="">ชื่อ</strong>
-                                <strong htmlFor="">นามสกุล</strong>
-                                <strong htmlFor="">เพศ</strong>
-                                <strong htmlFor="">จังหวัด</strong>
-                                <strong htmlFor="">ที่อยู่ล่าสุดของผู้สูญหาย</strong>
-                                <strong htmlFor="">วันที่สูญหาย</strong>
-                                <strong htmlFor="">สาเหตุการสูญหาย</strong>
-                                <strong htmlFor="">ข้อมูลเพิ่มเติม</strong>
-                            </div>
-                            <div className='single-data-col'>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                            </div>
-                            <div className='single-data-col'>
-                                <label htmlFor="">{missingData.missing_fname}</label>
-                                <label htmlFor="">{missingData.missing_lname}</label>
-                                <label htmlFor="">{missingData.missing_gender}</label>
-                                <label htmlFor="">{missingData.missing_province}</label>
-                                <label htmlFor="">{missingData.missing_position}</label>
-                                <label htmlFor="">{missingData.missing_date}</label>
-                                <label htmlFor="">{missingData.missing_cause}</label>
-                                <label htmlFor="">{missingData.missing_description}</label>
-                            </div>
-                        </section>
-                        <button className='single-data-btn btn-edit' onClick={handleSaveData}>บันทึกข้อมูล</button>
-                        <button className='single-data-btn btn-delete' onClick={confirmDelete}>ลบผู้สูญหาย</button>
+                                <div className='single-data-status'>
+                                    <strong className='text-status'>สถานะ</strong>
+                                    <div className='single-data-radio'>
+                                        <label className='cursor-status'><input type="radio" value="กำลังตรวจสอบ" className="cursor-status" checked={missingStatus === 'กำลังตรวจสอบ'} onChange={handleRadioChange} /> กำลังตรวจสอบ</label>
+                                        <label className='cursor-status'><input type="radio" value="พบแล้ว" className="cursor-status" checked={missingStatus === 'พบแล้ว'} onChange={handleRadioChange} /> พบแล้ว</label>
+                                        <label className='cursor-status'><input type="radio" value="สูญหาย" className="cursor-status" checked={missingStatus === 'สูญหาย'} onChange={handleRadioChange} /> สูญหาย</label>
+                                        <label className='cursor-status'><input type="radio" value="เสียชีวิต" className="cursor-status" checked={missingStatus === 'เสียชีวิต'} onChange={handleRadioChange} /> เสียชีวิต</label>
+                                    </div>
+                                </div>
+                            </section>
+                            <section className='single-data-group'>
+                                <div className='single-data-col'>
+                                    <strong htmlFor="">ชื่อ</strong>
+                                    <strong htmlFor="">นามสกุล</strong>
+                                    <strong htmlFor="">เพศ</strong>
+                                    <strong htmlFor="">จังหวัด</strong>
+                                    <strong htmlFor="">ที่อยู่ล่าสุดของผู้สูญหาย</strong>
+                                    <strong htmlFor="">วันที่สูญหาย</strong>
+                                    <strong htmlFor="">สาเหตุการสูญหาย</strong>
+                                    <strong htmlFor="">ข้อมูลเพิ่มเติม</strong>
+                                </div>
+                                <div className='single-data-col'>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                    <strong htmlFor="">:</strong>
+                                </div>
+                                <div className='single-data-col'>
+                                    <label htmlFor="">{missingData.missing_fname}</label>
+                                    <label htmlFor="">{missingData.missing_lname}</label>
+                                    <label htmlFor="">{missingData.missing_gender}</label>
+                                    <label htmlFor="">{missingData.missing_province}</label>
+                                    <label htmlFor="">{missingData.missing_position}</label>
+                                    <label htmlFor="">{missingData.missing_date}</label>
+                                    <label htmlFor="">{missingData.missing_cause}</label>
+                                    <label htmlFor="">{missingData.missing_description}</label>
+                                </div>
+                            </section>
+                            <button className='single-data-btn btn-edit' onClick={handleSaveData}>บันทึกข้อมูล</button>
+                            <button className='single-data-btn btn-delete' onClick={confirmDelete}>ลบผู้สูญหาย</button>
+                        </div>
                     </div>
                 </div>
+                <Footer />
             </div>
-            <Footer />
-        </div>
+        </AnimatedPage>
     );
 }
 

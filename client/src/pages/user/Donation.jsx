@@ -3,6 +3,7 @@ import './css/Donation.css'
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import logo3 from "../../assets/images/Donation/logo-do.png"
+import AnimatedPage from '../../AnimatedPage';
 
 function Donation() {
   useEffect(() => {
@@ -12,8 +13,7 @@ function Donation() {
     };
   }, []);
   return (
-    <div>
-
+    <AnimatedPage>
       <Navbar />
       <div className='bt-page'>
         <div className='tt-top'>
@@ -21,7 +21,7 @@ function Donation() {
         </div>
         <div className='frame-page'>
           <div className='txt-page'>
-            <label>ร่วมสนับสนุนพวกเรา</label>
+            <label className='txt-support'>ร่วมสนับสนุนพวกเรา</label>
             <div>
               <img className='qr-page' src={logo3} />
             </div>
@@ -30,7 +30,6 @@ function Donation() {
               <label style={{ color: "green" }}>1651360680</label><br></br>
               <label>กสิกร ชินาธิป ไชยถาวร </label>
             </div>
-            
           </div>
         </div>
         <div className='tt-p'>
@@ -39,9 +38,7 @@ function Donation() {
         </div>
       </div>
       <Footer></Footer>
-
-
-    </div>
+    </AnimatedPage>
 
   )
 }

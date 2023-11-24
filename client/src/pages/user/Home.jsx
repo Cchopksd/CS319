@@ -6,6 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 import axios from 'axios'
+import AnimatedPage from "../../AnimatedPage";
 
 const MissingCard = ({item}) => {
     const [commentCount, setCommentCount] = useState(null);
@@ -38,48 +39,50 @@ const MissingCard = ({item}) => {
     }, [item._id]);
 
     return (
-        <Link to={`/missing-profile/${item.missing_slug}`} style={{textDecoration: 'none', color: 'inherit'}}>
-            <div className="home-card" key={item._id}>
-                <img src={item.missing_photo1} alt=""/>
-                <div className="home-info-box">
-                    <div className="home-card-row-1">
-                        <label>{formatDate(item.updatedAt)}</label>
-                        <div className="home-card-status">
-                            {item.missing_status}
+        <AnimatedPage>
+            <Link to={`/missing-profile/${item.missing_slug}`} style={{textDecoration: 'none', color: 'inherit'}}>
+                <div className="home-card" key={item._id}>
+                    <img src={item.missing_photo1} alt=""/>
+                    <div className="home-info-box">
+                        <div className="home-card-row-1">
+                            <label>{formatDate(item.updatedAt)}</label>
+                            <div className="home-card-status">
+                                {item.missing_status}
+                            </div>
                         </div>
-                    </div>
-                    <div className="home-card-row-2">
-                        <label>{item.missing_fname}&ensp;</label>
-                        <label>{item.missing_lname}&ensp;</label>
-                        <label>{`(${item.missing_gender})`}</label>
-                    </div>
-                    <div className="home-card-row-3">
-                        <div className="home-card-place">
-                            <label>สูญหายที่ :</label>
-                            <label> {item.missing_position.length > 15 ? item.missing_position.slice(0, 15) + "..." : item.missing_position}</label>
+                        <div className="home-card-row-2">
+                            <label>{item.missing_fname}&ensp;</label>
+                            <label>{item.missing_lname}&ensp;</label>
+                            <label>{`(${item.missing_gender})`}</label>
                         </div>
-                        <div className="home-card-cause">
-                            <label>สาเหตุการหาย :</label>
-                            <label> {item.missing_cause.length > 15 ? item.missing_cause.slice(0, 15) + "..." : item.missing_cause}</label>
+                        <div className="home-card-row-3">
+                            <div className="home-card-place">
+                                <label>สูญหายที่ :</label>
+                                <label> {item.missing_position.length > 15 ? item.missing_position.slice(0, 15) + "..." : item.missing_position}</label>
+                            </div>
+                            <div className="home-card-cause">
+                                <label>สาเหตุการหาย :</label>
+                                <label> {item.missing_cause.length > 15 ? item.missing_cause.slice(0, 15) + "..." : item.missing_cause}</label>
+                            </div>
+                            <div className="home-card-date">
+                                <label>วันที่รายงานการสูญหาย :</label>
+                                <label> {formatDate(item.createdAt)}</label>
+                            </div>
                         </div>
-                        <div className="home-card-date">
-                            <label>วันที่รายงานการสูญหาย :</label>
-                            <label> {formatDate(item.createdAt)}</label>
-                        </div>
-                    </div>
-                    <div className="home-card-row-4">
-                        <div className="home-card-province">
-                            {item.missing_province}
-                        </div>
-                        <div className="home-card-clue">
-                            <MdOutlineModeComment size={20} className="home-card-clue-icon"/>
-                            {commentCount !== null ? commentCount : 'Loading...'}
-                            {/* <label>{getCount(item._id)}</label> */}
+                        <div className="home-card-row-4">
+                            <div className="home-card-province">
+                                {item.missing_province}
+                            </div>
+                            <div className="home-card-clue">
+                                <MdOutlineModeComment size={20} className="home-card-clue-icon"/>
+                                {commentCount !== null ? commentCount : 'Loading...'}
+                                {/* <label>{getCount(item._id)}</label> */}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </AnimatedPage>
     )
 }
 

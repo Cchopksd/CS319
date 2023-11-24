@@ -209,7 +209,7 @@ const MissingClue = ({missingid}) => {
                             <div style={{width: '100%'}}>
                                 <ImageUploaderClue onDataSend={handleDataFromChild}/>
                             </div>
-                            <IoSend size={20} style={{margin: '0 0 0 30px'}} onClick={sendComment}/>
+                            <IoSend size={20} style={{margin: '0 0 0 30px', cursor:'pointer'}} onClick={sendComment}/>
                         </div>
                     </div>
                 ) : (

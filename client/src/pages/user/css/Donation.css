@@ -68,15 +68,15 @@
 @media screen and (min-width: 0px) and (max-width : 1000px) {
     .frame-page {
         margin: auto auto auto auto;
-        height: 700px;
-        width: 700px;
+        height: 600px;
+        width: 400px;
         background-color: #393646;
         box-shadow:0px 5px 35px 10px rgba(0,0,0,0.16);
         padding-top: 10px;
     
     }
     .tt-top{
-        width: 1000px;
+        width: 400px;
         margin: 100px 0px 100px 00px;
         text-align: center;
         font-size: 25px;
@@ -84,10 +84,10 @@
         
     }
     .tt-p{
-        width: 1000px;
+        width: 400px;
         margin: 50px 0px 100px 00px;
         text-align: center;
-        font-size: 25px;
+        font-size: 20px;
         color: white;
     }
     .qr-page{
@@ -96,11 +96,14 @@
     }
     .pp-txt{
         margin: 10px;
-        font-size: 30px;
+        font-size: 25px;
 
     }
     .txt-page{  
         font-size: 40px;
+    }
+    .txt-support {
+        font-size: 30px;
     }
 }
 

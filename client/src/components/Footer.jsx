@@ -10,10 +10,10 @@ const Footer = () => {
   <div className="ft-color">
     <div className="footer-text">
       <div className='ft-bt'>
-        <a>นโยบายความเป็นส่วนตัว</a> 
-        <a>ข้อกำหนดการใช้งาน</a>
+        <a onClick={() => {navigate('/term-of-service')}} style={{cursor:'pointer'}}>นโยบายความเป็นส่วนตัว</a> 
+        <a onClick={() => {navigate('/privacy')}} style={{cursor:'pointer'}}>ข้อกำหนดการใช้งาน</a>
         </div>
-        <a className='ft-te'onClick={()=> {navigate(`/donation`)}}>สนับสนุนพวกเรา</a>
+        <a className='ft-te'onClick={()=> {navigate(`/donation`)}} style={{cursor:'pointer'}}>สนับสนุนพวกเรา</a>
      </div>
     </div>
   )
