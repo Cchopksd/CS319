@@ -153,7 +153,7 @@ const FindMissing = () => {
             </div>
             <div className="find-container">
                 <div className="find-title-box">
-                    <label>ตามมาหาบุคคลสูญหาย</label>
+                    <label>ตามหาบุคคลสูญหาย</label>
                     <div className="find-search-box">
                         <input type="text" placeholder="พิมพ์ชื่อหรือนามสกุลคนหาย" value={searchKeyword} onChange={(e) => setSearchKeyword(e.target.value)}/>
                         <div>
