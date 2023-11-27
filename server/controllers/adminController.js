@@ -68,28 +68,3 @@ exports.searchAdmin = async (req, res) => {
         return res.status(500).json({ message: err.message })
     }
 }
-
-// exports.findUserByCriteria = async (req, res) => {
-//     const { setName, setStatus } = req.body;
-
-//     if (!setName && !setStatus) {
-//         const allUsers = await MissingRequest.find();
-//         return res.json(allUsers);
-//     }
-
-//     try {
-//         let filteredUsers = [];
-
-//         if (setName) {
-//             // Using $regex to perform a case-insensitive partial match on missing_fname
-//             filteredUsers = await MissingRequest.find({ missing_fname: { $regex: new RegExp(setName, 'i') } });
-//         } else if (setStatus) {
-//             // Filtering based on missing_status
-//             filteredUsers = await MissingRequest.find({ missing_status: setStatus });
-//         }
-
-//         res.json(filteredUsers);
-//     } catch (error) {
-//         res.status(500).json({ error: error.message });
-//     }
-// };
