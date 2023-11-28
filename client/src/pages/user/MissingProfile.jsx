@@ -131,7 +131,17 @@ const MissingProfile = () => {
                                             <p style={{margin: '0px'}}>{`${name} ${surname} (${gender})`}</p>
                                         </div>
                                         <div className="missing-profile-body-date">
+                                            <label>วันที่สูญหาย:&ensp;</label>
                                             {missingDate}
+                                        </div>
+                                        <div>
+                                            <div>
+                                                <br />
+                                            </div>
+                                            <div style={{display: 'flex'}}>
+                                                <label style={{fontWeight:'bold'}}>สาเหตุการสูญหาย:</label>
+                                                <p style={{width: '300px', margin:"0px 0 0 10px", fontWeight:'bold'}}>{description}</p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className={`missing-profile-body-status not-found
@@ -158,7 +168,7 @@ const MissingProfile = () => {
                                     เบาะแส
                                 </button>
                             </div>
-                            {activeButton === 'button-info' ? <MissingInfo position={position} description={description}/> : <MissingClue missingid={missingid} />}
+                            {activeButton === 'button-info' ? <MissingInfo position={position} description={description} createdAt={createdAt} missingDate={missingDate}/> : <MissingClue missingid={missingid} />}
                         </div>
                 </div>
             </div>

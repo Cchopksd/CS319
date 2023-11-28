@@ -83,7 +83,7 @@ const ImageUploaderReport = ({ onDataSend }) => {
                                 เลือกรูป
                             </span>
                             <div className="report-file-desc">
-                                ไฟล์ที่รองรับ : .JPEG, .PNG
+                                ไฟล์ที่รองรับ : .JPEG, .PNG (เพิ่มรูปภาพได้ทีละ 1 รูป)
                             </div>
                         </div>
                     </>
