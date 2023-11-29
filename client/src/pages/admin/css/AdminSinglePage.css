@@ -56,6 +56,10 @@
     object-fit: cover;
 }
 
+.text-head-info{
+    width: 160px;
+}
+
 .hidden-element {
     display: none;
 }

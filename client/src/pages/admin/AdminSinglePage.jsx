@@ -102,34 +102,34 @@ const AdminSinglePage = () => {
                         </section>
                         <section className='single-data-group'>
                             <div className='single-data-col'>
-                                <strong htmlFor="">ชื่อ</strong>
-                                <strong htmlFor="">นามสกุล</strong>
-                                <strong htmlFor="">เพศ</strong>
-                                <strong htmlFor="">จังหวัด</strong>
-                                <strong htmlFor="">ที่อยู่ล่าสุดของผู้สูญหาย</strong>
-                                <strong htmlFor="">วันที่สูญหาย</strong>
-                                <strong htmlFor="">สาเหตุการสูญหาย</strong>
-                                <strong htmlFor="">ข้อมูลเพิ่มเติม</strong>
+                                <strong className='text-head-info'>ชื่อ</strong>
+                                <strong className='text-head-info'>นามสกุล</strong>
+                                <strong className='text-head-info'>เพศ</strong>
+                                <strong className='text-head-info'>จังหวัด</strong>
+                                <strong className='text-head-info'>ที่อยู่ล่าสุดของผู้สูญหาย</strong>
+                                <strong className='text-head-info'>วันที่สูญหาย</strong>
+                                <strong className='text-head-info'>สาเหตุการสูญหาย</strong>
+                                <strong className='text-head-info'>ข้อมูลเพิ่มเติม</strong>
                             </div>
                             <div className='single-data-col'>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
-                                <strong htmlFor="">:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
+                                <strong>:</strong>
                             </div>
                             <div className='single-data-col'>
-                                <label htmlFor="">{missingData.missing_fname}</label>
-                                <label htmlFor="">{missingData.missing_lname}</label>
-                                <label htmlFor="">{missingData.missing_gender}</label>
-                                <label htmlFor="">{missingData.missing_province}</label>
-                                <label htmlFor="">{missingData.missing_position}</label>
-                                <label htmlFor="">{missingData.missing_date}</label>
-                                <label htmlFor="">{missingData.missing_cause}</label>
-                                <label htmlFor="">{missingData.missing_description}</label>
+                                <label className='text-single-info'>{missingData.missing_fname}</label>
+                                <label className='text-single-info'>{missingData.missing_lname}</label>
+                                <label className='text-single-info'>{missingData.missing_gender}</label>
+                                <label className='text-single-info'>{missingData.missing_province}</label>
+                                <label className='text-single-info'>{missingData.missing_position}</label>
+                                <label className='text-single-info'>{missingData.missing_date}</label>
+                                <label className='text-single-info'>{missingData.missing_cause}</label>
+                                <label className='text-single-info'>{missingData.missing_description}</label>
                             </div>
                         </section>
                         <button className='single-data-btn btn-edit' onClick={handleSaveData}>บันทึกข้อมูล</button>

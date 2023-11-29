@@ -115,7 +115,7 @@ const AdministratorPage = () => {
                                         <td className='table-field'>{user.missing_gender}</td>
                                         <td className='table-field'>{user.missing_province}</td>
                                         <td className='table-field'>{user.missing_date}</td>
-                                        <td className='table-field'>{user.missing_cause}</td>
+                                        <td className='table-field cause-field'>{user.missing_cause}</td>
                                         <td className='table-field'>
                                             <div className={`admin-person-status
                                             ${user.missing_status === 'พบแล้ว' ? 'admin-person-found' :
